@@ -43,49 +43,37 @@ class InputField extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          InputFieldLabel(
-            label,
-            style: style,
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 5),
-            child: TextFormField(
-              onChanged: onChanged,
-              onSaved: onSave,
-              controller: textController,
-              keyboardType: inputType,
-              obscureText: isPassword,
-              validator: validate,
-              maxLines: maxLine,
-              style: style,
-              onFieldSubmitted: onFieldSubmitted,
-              decoration: InputDecoration(
-                hintText: hint,
-                hintStyle: style,
-                prefixIcon: Icon(
-                  prefix,
-                  size: AppSize.s14,
-                  color: ColorManager.grey,
-                ),
-                suffixIcon: suffix != null
-                    ? IconButton(
-                        onPressed: suffixPressed,
-                        icon: Icon(
-                          suffix,
-                          size: AppSize.s14,
-                          color: ColorManager.grey,
-                        ))
-                    : null,
-              ),
+      child: Padding(
+        padding: const EdgeInsets.only(top: AppSize.s18),
+        child: TextFormField(
+          onChanged: onChanged,
+          onSaved: onSave,
+          controller: textController,
+          keyboardType: inputType,
+          obscureText: isPassword,
+          validator: validate,
+          maxLines: maxLine,
+          style: style,
+          onFieldSubmitted: onFieldSubmitted,
+          decoration: InputDecoration(
+            hintText: hint,
+            hintStyle: style,
+            prefixIcon: Icon(
+              prefix,
+              size: AppSize.s14,
+              color: ColorManager.grey,
             ),
-          )
-        ],
+            suffixIcon: suffix != null
+                ? IconButton(
+                    onPressed: suffixPressed,
+                    icon: Icon(
+                      suffix,
+                      size: AppSize.s14,
+                      color: ColorManager.grey,
+                    ))
+                : null,
+          ),
+        ),
       ),
     );
   }

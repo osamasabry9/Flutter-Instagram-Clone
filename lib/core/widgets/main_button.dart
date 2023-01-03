@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/core/utils/values_manager.dart';
 import '../utils/color_manager.dart';
 import '../utils/font_manager.dart';
 
@@ -33,6 +34,7 @@ class MainButton extends StatelessWidget {
         alignment: Alignment.center,
         height: height ?? size.height * 0.07,
         width: width,
+        margin: const EdgeInsets.symmetric(vertical: AppSize.s20),
         decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(borderRadius),
