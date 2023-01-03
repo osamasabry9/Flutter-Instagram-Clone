@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/features/auth/presentation/page/login_screen.dart';
+import 'package:instagram_clone/features/auth/presentation/page/register_screen.dart';
 
 import 'strings_manager.dart';
 
@@ -16,6 +18,14 @@ class RouteGenerator {
       case Routes.splashRoute:
         return MaterialPageRoute(
           builder: (_) => const Scaffold(),
+        );
+        case Routes.loginRoute:
+        return MaterialPageRoute(
+          builder: (_) =>  LoginScreen(),
+        );
+        case Routes.registerRoute:
+        return MaterialPageRoute(
+          builder: (_) =>  RegisterScreen(),
         );
       default:
         return unDefinedRoute();

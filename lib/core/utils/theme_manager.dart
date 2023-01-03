@@ -9,7 +9,7 @@ import 'styles_manager.dart';
 ThemeData getApplicationTheme() {
   return ThemeData(
     brightness: Brightness.dark,
-    
+
     // cardView theme
     cardTheme: const CardTheme(
       color: ColorManager.grey,
@@ -46,7 +46,7 @@ ThemeData getApplicationTheme() {
       style: ElevatedButton.styleFrom(
         textStyle: getRegularStyle(
           color: ColorManager.white,
-          fontSize: FontSize.s17,
+          fontSize: FontSize.s12,
         ),
         backgroundColor: ColorManager.primary,
         shape: RoundedRectangleBorder(
@@ -58,17 +58,17 @@ ThemeData getApplicationTheme() {
     // text Theme
     textTheme: TextTheme(
       displayLarge:
-          getSemBoldStyle(color: ColorManager.darkGrey, fontSize: FontSize.s16),
+          getSemBoldStyle(color: ColorManager.grey, fontSize: FontSize.s16),
       headlineLarge:
-          getSemBoldStyle(color: ColorManager.darkGrey, fontSize: FontSize.s16),
+          getSemBoldStyle(color: ColorManager.grey, fontSize: FontSize.s16),
       headlineMedium:
-          getRegularStyle(color: ColorManager.darkGrey, fontSize: FontSize.s14),
+          getRegularStyle(color: ColorManager.grey, fontSize: FontSize.s14),
       titleMedium:
-          getMediumStyle(color: ColorManager.primary, fontSize: FontSize.s16),
+          getMediumStyle(color: ColorManager.grey, fontSize: FontSize.s16),
       bodySmall: getRegularStyle(color: ColorManager.grey),
       bodyLarge: getRegularStyle(color: ColorManager.grey1),
       labelMedium:
-          getBoldStyle(color: ColorManager.primary, fontSize: FontSize.s16),
+          getBoldStyle(color: ColorManager.grey, fontSize: FontSize.s16),
     ),
 
     // input decoration theme (text form field)
