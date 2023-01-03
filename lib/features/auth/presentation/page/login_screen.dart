@@ -42,7 +42,6 @@ class LoginScreen extends StatelessWidget {
                             return null;
                           },
                         ),
-                        const SizedBox(height: AppSize.s14),
                         InputField(
                           textController: passwordController,
                           label: "Password",
@@ -59,23 +58,20 @@ class LoginScreen extends StatelessWidget {
                           },
                         ),
                         const SizedBox(height: AppSize.s20),
-                        Align(
-                          alignment: AlignmentDirectional.bottomEnd,
-                          child: GestureDetector(
-                            onTap: () {},
-                            child:
-                                const InputFieldLabel('Forget your Password ?'),
-                          ),
+                        TextNavigatorWidget(
+                          titleOne: "Forget your Password ?",
+                          titleTwo: '',
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          onTap: () {},
                         ),
-                        const SizedBox(height: AppSize.s20),
                         MainButton(
                           onTap: () {},
-                          title: ' log in',
+                          title: ' Sign in',
                         ),
-                        const SizedBox(height: AppSize.s20),
                         TextNavigatorWidget(
                           titleOne: "Don't have account? ",
                           titleTwo: 'Sign Up',
+                          mainAxisAlignment: MainAxisAlignment.center,
                           onTap: () {
                             Navigator.pushReplacementNamed(
                                 context, Routes.registerRoute);
