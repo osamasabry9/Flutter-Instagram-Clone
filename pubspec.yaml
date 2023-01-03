@@ -1,19 +1,16 @@
 name: instagram_clone
 description: Build Instagram Clone - with Clean Architecture Flutter (Firebase Full-Stack).
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.19.0-403.0.dev <3.0.0'
-
+  sdk: ">=2.19.0-403.0.dev <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-
 
   cupertino_icons: ^1.0.2
   flutter_bloc: ^8.1.1
@@ -37,7 +34,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-
   flutter_lints: ^2.0.0
   flutter_launcher_icons: ^0.11.0
   build_runner: ^2.1.11
@@ -49,10 +45,23 @@ flutter_icons:
   image_path: "assets/instagram.png"
 
 flutter:
-
-
   uses-material-design: true
 
   assets:
     - assets/.
     - assets/instagram.png
+
+      # example:
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Montserrat-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Montserrat-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Montserrat-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Montserrat-Light.ttf
+          weight: 300
