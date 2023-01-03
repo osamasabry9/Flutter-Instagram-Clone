@@ -1,0 +1,56 @@
+name: instagram_clone
+description: Build Instagram Clone - with Clean Architecture Flutter (Firebase Full-Stack).
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.19.0-403.0.dev <3.0.0'
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  cupertino_icons: ^1.0.2
+  flutter_bloc: ^8.1.1
+  equatable: ^2.0.5
+  flutter_icons: ^1.1.0
+  cloud_firestore: ^4.3.1
+  firebase_storage: ^11.0.10
+  firebase_auth: ^4.2.4
+  firebase_core: ^2.4.1
+  get_it: ^7.2.0
+  flutter_svg: ^1.1.6
+  image_picker: ^0.8.6
+  intl: ^0.17.0
+  uuid: ^3.0.7
+  cached_network_image: ^3.2.3
+  fluttertoast: ^8.1.2
+  modal_bottom_sheet: ^2.1.2
+  toast: ^0.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+  flutter_lints: ^2.0.0
+  flutter_launcher_icons: ^0.11.0
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/instagram.png"
+
+flutter:
+
+
+  uses-material-design: true
+
+  assets:
+    - assets/.
+    - assets/instagram.png
