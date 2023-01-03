@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/core/utils/color_manager.dart';
 
+import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/routes_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/input_field.dart';
@@ -31,6 +33,34 @@ class RegisterScreen extends StatelessWidget {
                   child: SingleChildScrollView(
                     child: Column(children: [
                       const LogoWidget(),
+                      Center(
+                        child: Stack(
+                          children: [
+                            SizedBox(
+                              width: AppSize.s70,
+                              height: AppSize.s70,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(30),
+                                child: Image.asset(
+                                  ImageAssets.profileDefault,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              right: -10,
+                              bottom: -15,
+                              child: IconButton(
+                                onPressed: () {},
+                                icon: const Icon(
+                                  Icons.add_a_photo,
+                                  color: ColorManager.primary,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                       InputField(
                         textController: userNameController,
                         label: "Your Name",
@@ -43,7 +73,6 @@ class RegisterScreen extends StatelessWidget {
                           return null;
                         },
                       ),
-                      const SizedBox(height: AppSize.s14),
                       InputField(
                         textController: emailController,
                         label: "Your email",
@@ -56,7 +85,6 @@ class RegisterScreen extends StatelessWidget {
                           return null;
                         },
                       ),
-                      const SizedBox(height: AppSize.s14),
                       InputField(
                         textController: passwordController,
                         label: "Password",
@@ -72,7 +100,6 @@ class RegisterScreen extends StatelessWidget {
                           return null;
                         },
                       ),
-                      const SizedBox(height: AppSize.s14),
                       InputField(
                         textController: bioController,
                         label: "Bio",
@@ -86,15 +113,14 @@ class RegisterScreen extends StatelessWidget {
                           return null;
                         },
                       ),
-                      const SizedBox(height: AppSize.s20),
                       MainButton(
                         onTap: () {},
                         title: ' Sign Up',
                       ),
-                      const SizedBox(height: AppSize.s20),
                       TextNavigatorWidget(
                         titleOne: "Already have an account? ",
-                        titleTwo: 'Login',
+                        titleTwo: 'Sign in',
+                        mainAxisAlignment: MainAxisAlignment.center,
                         onTap: () {
                           Navigator.pushReplacementNamed(
                               context, Routes.loginRoute);
