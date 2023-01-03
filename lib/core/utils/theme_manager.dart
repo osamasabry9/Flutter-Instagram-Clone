@@ -11,7 +11,7 @@ ThemeData getApplicationTheme() {
     brightness: Brightness.dark,
     
     // cardView theme
-    cardTheme: CardTheme(
+    cardTheme: const CardTheme(
       color: ColorManager.grey,
       shadowColor: ColorManager.black,
       elevation: AppSize.s4,
@@ -19,7 +19,7 @@ ThemeData getApplicationTheme() {
 
     // appBar Theme
     appBarTheme: AppBarTheme(
-      systemOverlayStyle: SystemUiOverlayStyle(
+      systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarColor: ColorManager.darkPrimary,
         statusBarBrightness: Brightness.light,
       ),
@@ -34,8 +34,8 @@ ThemeData getApplicationTheme() {
     ),
 
     // button Theme
-    buttonTheme: ButtonThemeData(
-      shape: const StadiumBorder(),
+    buttonTheme: const ButtonThemeData(
+      shape: StadiumBorder(),
       disabledColor: ColorManager.grey1,
       buttonColor: ColorManager.primary,
       splashColor: ColorManager.lightPrimary,
@@ -79,23 +79,23 @@ ThemeData getApplicationTheme() {
       labelStyle:
           getMediumStyle(color: ColorManager.grey, fontSize: FontSize.s14),
       errorStyle: getRegularStyle(color: ColorManager.error),
-      enabledBorder: OutlineInputBorder(
+      enabledBorder: const OutlineInputBorder(
         borderSide: BorderSide(color: ColorManager.grey, width: AppSize.s1_5),
-        borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8)),
+        borderRadius: BorderRadius.all(Radius.circular(AppSize.s8)),
       ),
-      focusedBorder: OutlineInputBorder(
+      focusedBorder: const OutlineInputBorder(
         borderSide:
             BorderSide(color: ColorManager.primary, width: AppSize.s1_5),
-        borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8)),
+        borderRadius: BorderRadius.all(Radius.circular(AppSize.s8)),
       ),
-      errorBorder: OutlineInputBorder(
+      errorBorder: const OutlineInputBorder(
         borderSide: BorderSide(color: ColorManager.error, width: AppSize.s1_5),
-        borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8)),
+        borderRadius: BorderRadius.all(Radius.circular(AppSize.s8)),
       ),
-      focusedErrorBorder: OutlineInputBorder(
+      focusedErrorBorder: const OutlineInputBorder(
         borderSide:
             BorderSide(color: ColorManager.primary, width: AppSize.s1_5),
-        borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8)),
+        borderRadius: BorderRadius.all(Radius.circular(AppSize.s8)),
       ),
     ),
   );
