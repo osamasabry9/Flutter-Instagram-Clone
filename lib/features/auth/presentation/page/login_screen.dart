@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../../../core/utils/routes_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/input_field.dart';
-import '../../../../core/widgets/input_field_label.dart';
 import '../../../../core/widgets/main_button.dart';
 import '../widgets/logo_widget.dart';
 import '../widgets/text_navigator_widget.dart';
@@ -65,7 +64,9 @@ class LoginScreen extends StatelessWidget {
                           onTap: () {},
                         ),
                         MainButton(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.of(context).pushReplacementNamed(Routes.mainRoute);
+                          },
                           title: ' Sign in',
                         ),
                         TextNavigatorWidget(
