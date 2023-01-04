@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:instagram_clone/features/auth/presentation/page/login_screen.dart';
 import 'package:instagram_clone/features/auth/presentation/page/register_screen.dart';
 
+import '../../features/main_pages/main_screen.dart';
 import 'strings_manager.dart';
 
 class Routes {
@@ -27,6 +28,11 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (_) =>  RegisterScreen(),
         );
+        case Routes.mainRoute:
+        return MaterialPageRoute(
+          builder: (_) =>   const MainScreen(),
+        );
+        
       default:
         return unDefinedRoute();
     }

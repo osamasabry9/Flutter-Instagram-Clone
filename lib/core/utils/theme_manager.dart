@@ -9,6 +9,7 @@ import 'styles_manager.dart';
 ThemeData getApplicationTheme() {
   return ThemeData(
     brightness: Brightness.dark,
+    scaffoldBackgroundColor: ColorManager.black,
 
     // cardView theme
     cardTheme: const CardTheme(
@@ -20,19 +21,23 @@ ThemeData getApplicationTheme() {
     // appBar Theme
     appBarTheme: AppBarTheme(
       systemOverlayStyle: const SystemUiOverlayStyle(
-        statusBarColor: ColorManager.darkPrimary,
+        statusBarColor: ColorManager.black,
         statusBarBrightness: Brightness.light,
       ),
-      color: ColorManager.primary,
-      centerTitle: true,
-      elevation: AppSize.s4,
-      shadowColor: ColorManager.lightPrimary,
+      color: ColorManager.black,
+      elevation: AppSize.s0,
+      shadowColor: ColorManager.black,
       titleTextStyle: getRegularStyle(
         fontSize: FontSize.s16,
         color: ColorManager.white,
       ),
     ),
-
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      elevation: AppSize.s2,
+      backgroundColor: ColorManager.black,
+      selectedItemColor: ColorManager.primary,
+      unselectedItemColor: ColorManager.grey,
+    ),
     // button Theme
     buttonTheme: const ButtonThemeData(
       shape: StadiumBorder(),
@@ -64,7 +69,7 @@ ThemeData getApplicationTheme() {
       headlineMedium:
           getRegularStyle(color: ColorManager.grey, fontSize: FontSize.s14),
       titleMedium:
-          getMediumStyle(color: ColorManager.grey, fontSize: FontSize.s16),
+          getMediumStyle(color: ColorManager.white, fontSize: FontSize.s16),
       bodySmall: getRegularStyle(color: ColorManager.grey),
       bodyLarge: getRegularStyle(color: ColorManager.grey1),
       labelMedium:
