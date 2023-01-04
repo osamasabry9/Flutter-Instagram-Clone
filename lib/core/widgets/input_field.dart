@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import '../utils/color_manager.dart';
 import '../utils/values_manager.dart';
 
-import 'input_field_label.dart';
-
 class InputField extends StatelessWidget {
   final String label;
   final String hint;
@@ -60,7 +58,7 @@ class InputField extends StatelessWidget {
             hintStyle: style,
             prefixIcon: Icon(
               prefix,
-              size: AppSize.s14,
+              size: AppSize.s20,
               color: ColorManager.grey,
             ),
             suffixIcon: suffix != null
@@ -68,7 +66,7 @@ class InputField extends StatelessWidget {
                     onPressed: suffixPressed,
                     icon: Icon(
                       suffix,
-                      size: AppSize.s14,
+                      size: AppSize.s20,
                       color: ColorManager.grey,
                     ))
                 : null,
