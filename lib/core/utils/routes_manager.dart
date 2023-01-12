@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../features/Comment/presentation/Screens/comment_screen.dart';
 import '../../features/Post/presentation/screen/update_post_screen.dart';
-import '../../features/auth/presentation/page/login_screen.dart';
-import '../../features/auth/presentation/page/register_screen.dart';
+import '../../features/auth/presentation/screens/login_screen.dart';
+import '../../features/auth/presentation/screens/register_screen.dart';
 import '../../features/main_Screens/main_screen.dart';
 import '../../features/profile/presentation/screen/edit_profile_screen.dart';
 import 'strings_manager.dart';
