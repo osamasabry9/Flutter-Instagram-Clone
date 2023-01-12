@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:instagram_clone/core/utils/color_manager.dart';
 import 'package:instagram_clone/core/utils/constants_manager.dart';
+import 'package:instagram_clone/core/utils/routes_manager.dart';
 import 'package:instagram_clone/core/utils/values_manager.dart';
 
 import '../../../../../core/widgets/like_animation_widget.dart';
+import '../../../../Post/presentation/screen/update_post_page.dart';
 import '../../../../auth/presentation/widgets/profile_widget.dart';
 
 class SinglePostCardWidget extends StatefulWidget {
@@ -61,7 +63,7 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
               ),
             ],
           ),
-          AppConstants.sizeVer(AppSize.s12),
+          AppConstants.sizeVer(AppSize.s4),
           GestureDetector(
             onDoubleTap: () {
               _likePost();
@@ -120,7 +122,9 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
                         )),
                     AppConstants.sizeHor(AppSize.s14),
                     GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(context, Routes.commentRoute);
+                        },
                         child: const Icon(
                           Bootstrap.chat,
                           size: AppSize.s25,
@@ -150,29 +154,29 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
             style: TextStyle(
                 color: ColorManager.white, fontWeight: FontWeight.bold),
           ),
-          AppConstants.sizeVer(AppSize.s12),
+          AppConstants.sizeVer(AppSize.s4),
           Row(
             children: [
               const Text(
-                "post.username",
+                "Username",
                 style: TextStyle(
                     color: ColorManager.white, fontWeight: FontWeight.bold),
               ),
               AppConstants.sizeHor(AppSize.s12),
               const Text(
-                "post.description",
+                "post description",
                 style: TextStyle(color: ColorManager.white),
               ),
             ],
           ),
-          AppConstants.sizeVer(AppSize.s12),
+          AppConstants.sizeVer(AppSize.s4),
           GestureDetector(
               onTap: () {},
               child: const Text(
                 "View all  comments",
                 style: TextStyle(color: ColorManager.grey),
               )),
-          AppConstants.sizeHor(AppSize.s12),
+          AppConstants.sizeVer(AppSize.s4),
           const Text(
             "22/22/2022",
             style: TextStyle(color: ColorManager.grey),
@@ -191,7 +195,7 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
           return Container(
             height: 150,
             decoration:
-                BoxDecoration(color: ColorManager.black.withOpacity(.8)),
+                BoxDecoration(color: ColorManager.darkGrey.withOpacity(.8)),
             child: SingleChildScrollView(
               child: Container(
                 margin: const EdgeInsets.symmetric(vertical: 10),
@@ -213,7 +217,7 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
                     ),
                     const Divider(
                       thickness: 1,
-                      color: ColorManager.darkGrey,
+                      color: ColorManager.black,
                     ),
                     const SizedBox(
                       height: 8,
@@ -234,14 +238,15 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
                     AppConstants.sizeVer(AppSize.s8),
                     const Divider(
                       thickness: 1,
-                      color: ColorManager.darkGrey,
+                      color: ColorManager.black,
                     ),
                     AppConstants.sizeVer(AppSize.s8),
                     Padding(
                       padding: const EdgeInsets.only(left: 10.0),
                       child: GestureDetector(
                         onTap: () {
-                          // Navigator.push(context, MaterialPageRoute(builder: (context) => UpdatePostPage()));
+                          Navigator.pushNamed(context, Routes.updatePostRoute);
+                         
                         },
                         child: const Text(
                           "Update Post",
