@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:instagram_clone/core/utils/color_manager.dart';
-import 'package:instagram_clone/core/utils/constants_manager.dart';
-import 'package:instagram_clone/core/utils/values_manager.dart';
+import '../../../../core/utils/color_manager.dart';
+import '../../../../core/utils/constants_manager.dart';
+import '../../../../core/utils/values_manager.dart';
 
 import '../../../auth/presentation/widgets/profile_widget.dart';
 import '../../../profile/presentation/widgets/input_edit_profile_widget.dart';

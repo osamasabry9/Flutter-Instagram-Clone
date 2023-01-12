@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/utils/color_manager.dart';
-import 'package:instagram_clone/core/utils/values_manager.dart';
+import '../../../../core/utils/color_manager.dart';
+import '../../../../core/utils/values_manager.dart';
 
 class PostScreen extends StatelessWidget {
   const PostScreen({super.key});

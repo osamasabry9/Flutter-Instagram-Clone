@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/utils/values_manager.dart';
 
 import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
+import '../../../../core/utils/values_manager.dart';
 
 class InfoUserWidget extends StatelessWidget {
   const InfoUserWidget({super.key});

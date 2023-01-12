@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/utils/assets_manager.dart';
+import '../../../../core/utils/assets_manager.dart';
 
 Widget profileWidget({String? imageUrl, File? image}) {
   if (image == null) {

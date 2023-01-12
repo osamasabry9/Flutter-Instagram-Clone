@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/features/Comment/presentation/page/comment_page.dart';
-import 'package:instagram_clone/features/auth/presentation/page/login_screen.dart';
-import 'package:instagram_clone/features/auth/presentation/page/register_screen.dart';
-import 'package:instagram_clone/features/profile/presentation/screen/edit_profile_page.dart';
 
-import '../../features/Post/presentation/screen/update_post_page.dart';
-import '../../features/main_pages/main_screen.dart';
+import '../../features/Comment/presentation/Screens/comment_screen.dart';
+import '../../features/Post/presentation/screen/update_post_screen.dart';
+import '../../features/auth/presentation/page/login_screen.dart';
+import '../../features/auth/presentation/page/register_screen.dart';
+import '../../features/main_Screens/main_screen.dart';
+import '../../features/profile/presentation/screen/edit_profile_screen.dart';
 import 'strings_manager.dart';
 
 class Routes {
@@ -42,15 +42,15 @@ class RouteGenerator {
         );
       case Routes.editProfileRoute:
         return MaterialPageRoute(
-          builder: (_) => const EditProfilePage(),
+          builder: (_) => const EditProfileScreen(),
         );
       case Routes.commentRoute:
         return MaterialPageRoute(
-          builder: (_) => const CommentPage(),
+          builder: (_) => const CommentScreen(),
         );
       case Routes.updatePostRoute:
         return MaterialPageRoute(
-          builder: (_) => const UpdatePostPage(),
+          builder: (_) => const UpdatePostScreen(),
         );
 
       default:

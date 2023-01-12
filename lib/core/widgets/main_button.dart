@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/utils/values_manager.dart';
+import '../utils/values_manager.dart';
 import '../utils/color_manager.dart';
 import '../utils/font_manager.dart';
 

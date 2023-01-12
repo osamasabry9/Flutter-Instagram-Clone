@@ -2,23 +2,23 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:instagram_clone/core/utils/color_manager.dart';
 
+import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/constants_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../auth/presentation/widgets/profile_widget.dart';
 import '../widgets/input_edit_profile_widget.dart';
 
-class EditProfilePage extends StatefulWidget {
-  const EditProfilePage({
+class EditProfileScreen extends StatefulWidget {
+  const EditProfileScreen({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<EditProfilePage> createState() => _EditProfilePageState();
+  State<EditProfileScreen> createState() => _EditProfileScreenState();
 }
 
-class _EditProfilePageState extends State<EditProfilePage> {
+class _EditProfileScreenState extends State<EditProfileScreen> {
   late TextEditingController _nameController;
   late TextEditingController _usernameController;
   late TextEditingController _websiteController;

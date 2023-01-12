@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/utils/constants_manager.dart';
-import 'package:instagram_clone/core/utils/values_manager.dart';
+import '../../../../../core/utils/constants_manager.dart';
+import '../../../../../core/utils/values_manager.dart';
 
 import '../../../../../core/widgets/input_field.dart';
 import '../../../../auth/presentation/widgets/profile_widget.dart';

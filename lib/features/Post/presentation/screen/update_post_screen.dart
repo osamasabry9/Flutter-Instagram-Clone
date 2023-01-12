@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../widgets/update_post_main_widget.dart';
 
-class UpdatePostPage extends StatelessWidget {
-  const UpdatePostPage({
+class UpdatePostScreen extends StatelessWidget {
+  const UpdatePostScreen({
     Key? key,
   }) : super(key: key);
 

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
-import 'package:instagram_clone/core/utils/color_manager.dart';
-import 'package:instagram_clone/core/utils/constants_manager.dart';
-import 'package:instagram_clone/core/utils/routes_manager.dart';
-import 'package:instagram_clone/core/utils/values_manager.dart';
+import '../../../../../core/utils/color_manager.dart';
+import '../../../../../core/utils/constants_manager.dart';
+import '../../../../../core/utils/routes_manager.dart';
+import '../../../../../core/utils/values_manager.dart';
 
 import '../../../../../core/widgets/like_animation_widget.dart';
-import '../../../../Post/presentation/screen/update_post_page.dart';
+
 import '../../../../auth/presentation/widgets/profile_widget.dart';
 
 class SinglePostCardWidget extends StatefulWidget {

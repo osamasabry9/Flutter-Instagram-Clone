@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/utils/values_manager.dart';
-import 'package:instagram_clone/features/Comment/presentation/widgets/single_comment_widget.dart';
+import '../../../../core/utils/values_manager.dart';
+import 'single_comment_widget.dart';
 
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/constants_manager.dart';
