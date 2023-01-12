@@ -42,7 +42,9 @@ class _SearchMainWidgetState extends State<SearchMainWidget> {
               label: "Search",
               hint: "Search",
               prefix: Icons.search,
-              validate: (p0) {},
+              validate: (p0) {
+                return null;
+              },
             ),
             AppConstants.sizeVer(AppSize.s20),
             _searchController.text.isNotEmpty
