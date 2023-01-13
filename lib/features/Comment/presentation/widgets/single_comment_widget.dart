@@ -4,7 +4,7 @@ import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/constants_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/input_field.dart';
-import '../../../auth/presentation/widgets/profile_widget.dart';
+import '../../../../core/widgets/image_profile_widget.dart';
 
 class SingleCommentWidget extends StatefulWidget {
   const SingleCommentWidget({super.key});
@@ -31,7 +31,7 @@ class _SingleCommentWidgetState extends State<SingleCommentWidget> {
                 height: AppSize.s40,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(AppSize.s20),
-                  child: profileWidget(imageUrl: ""),
+                  child: imageProfileWidget(imageUrl: ""),
                 ),
               ),
               AppConstants.sizeHor(AppSize.s16),

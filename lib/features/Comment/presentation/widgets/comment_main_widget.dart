@@ -4,7 +4,7 @@ import 'single_comment_widget.dart';
 
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/constants_manager.dart';
-import '../../../auth/presentation/widgets/profile_widget.dart';
+import '../../../../core/widgets/image_profile_widget.dart';
 
 class CommentMainWidget extends StatefulWidget {
   const CommentMainWidget({super.key});
@@ -55,7 +55,7 @@ class _CommentMainWidgetState extends State<CommentMainWidget> {
                   height: AppSize.s40,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(AppSize.s20),
-                    child: profileWidget(imageUrl: ""),
+                    child: imageProfileWidget(imageUrl: ""),
                   ),
                 ),
                 AppConstants.sizeHor(AppSize.s12),
@@ -94,12 +94,12 @@ class _CommentMainWidgetState extends State<CommentMainWidget> {
               height: AppSize.s40,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(AppSize.s20),
-                child: profileWidget(imageUrl: ""),
+                child: imageProfileWidget(imageUrl: ""),
               ),
             ),
             AppConstants.sizeHor(AppSize.s10),
             Expanded(
-              child: TextFormField(
+                child: TextFormField(
               controller: _descriptionController,
               decoration: const InputDecoration(
                 border: InputBorder.none,

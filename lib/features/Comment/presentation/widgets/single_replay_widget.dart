@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import '../../../../core/utils/constants_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 
-
 import '../../../../core/utils/color_manager.dart';
-import '../../../auth/presentation/widgets/profile_widget.dart';
+import '../../../../core/widgets/image_profile_widget.dart';
 
 class SingleReplayWidget extends StatefulWidget {
   const SingleReplayWidget({
@@ -30,7 +29,7 @@ class _SingleReplayWidgetState extends State<SingleReplayWidget> {
               height: AppSize.s40,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(AppSize.s20),
-                child: profileWidget(imageUrl: ''),
+                child: imageProfileWidget(imageUrl: ''),
               ),
             ),
             AppConstants.sizeHor(AppSize.s10),
