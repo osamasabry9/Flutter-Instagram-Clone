@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
+
 import '../../../../../core/utils/color_manager.dart';
 import '../../../../../core/utils/constants_manager.dart';
 import '../../../../../core/utils/routes_manager.dart';
 import '../../../../../core/utils/values_manager.dart';
-
+import '../../../../../core/widgets/image_profile_widget.dart';
 import '../../../../../core/widgets/like_animation_widget.dart';
-
-import '../../../../auth/presentation/widgets/profile_widget.dart';
 
 class SinglePostCardWidget extends StatefulWidget {
   const SinglePostCardWidget({
@@ -40,7 +39,7 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
                       height: 30,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(15),
-                        child: profileWidget(imageUrl: ""),
+                        child: imageProfileWidget(imageUrl: ""),
                       ),
                     ),
                     AppConstants.sizeHor(AppSize.s12),
@@ -246,7 +245,6 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
                       child: GestureDetector(
                         onTap: () {
                           Navigator.pushNamed(context, Routes.updatePostRoute);
-                         
                         },
                         child: const Text(
                           "Update Post",

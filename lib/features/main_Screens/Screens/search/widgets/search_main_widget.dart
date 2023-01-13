@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+
 import '../../../../../core/utils/constants_manager.dart';
 import '../../../../../core/utils/values_manager.dart';
-
+import '../../../../../core/widgets/image_profile_widget.dart';
 import '../../../../../core/widgets/input_field.dart';
-import '../../../../auth/presentation/widgets/profile_widget.dart';
 
 class SearchMainWidget extends StatefulWidget {
   const SearchMainWidget({Key? key}) : super(key: key);
@@ -63,7 +63,7 @@ class _SearchMainWidgetState extends State<SearchMainWidget> {
                                   height: 40,
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(20),
-                                    child: profileWidget(imageUrl: ''),
+                                    child: imageProfileWidget(imageUrl: ''),
                                   ),
                                 ),
                                 AppConstants.sizeHor(AppSize.s12),
@@ -92,7 +92,7 @@ class _SearchMainWidgetState extends State<SearchMainWidget> {
                             child: SizedBox(
                               width: 100,
                               height: 100,
-                              child: profileWidget(imageUrl: ''),
+                              child: imageProfileWidget(imageUrl: ''),
                             ),
                           );
                         }),

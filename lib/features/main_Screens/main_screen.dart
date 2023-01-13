@@ -4,7 +4,7 @@ import 'package:icons_plus/icons_plus.dart';
 
 import '../../core/utils/color_manager.dart';
 import '../Post/presentation/screen/post_screen.dart';
-import '../profile/presentation/screen/profile_screen.dart';
+import '../user/presentation/profile/screen/profile_screen.dart';
 import 'Screens/activity/screen/activity_screen.dart';
 import 'Screens/home/screen/home_screen.dart';
 import 'Screens/search/screen/search_screen.dart';
