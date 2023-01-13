@@ -6,8 +6,8 @@ import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/constants_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 
-import '../../../auth/presentation/widgets/profile_widget.dart';
-import '../../../profile/presentation/widgets/input_edit_profile_widget.dart';
+import '../../../../core/widgets/image_profile_widget.dart';
+import '../../../user/presentation/profile/widgets/input_edit_profile_widget.dart';
 
 class UpdatePostMainWidget extends StatefulWidget {
   const UpdatePostMainWidget({
@@ -80,7 +80,7 @@ class _UpdatePostMainWidgetState extends State<UpdatePostMainWidget> {
                 height: AppSize.s100,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(AppSize.s50),
-                  child: profileWidget(imageUrl: ""),
+                  child: imageProfileWidget(imageUrl: ""),
                 ),
               ),
               AppConstants.sizeVer(AppSize.s10),
@@ -94,7 +94,7 @@ class _UpdatePostMainWidgetState extends State<UpdatePostMainWidget> {
                   SizedBox(
                     width: double.infinity,
                     height: AppSize.s200,
-                    child: profileWidget(imageUrl: "", image: _image),
+                    child: imageProfileWidget(imageUrl: "", image: _image),
                   ),
                   Positioned(
                     top: AppSize.s16,
