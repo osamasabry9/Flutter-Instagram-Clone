@@ -18,7 +18,7 @@ class UserLoading extends UserState {
 class UserLoaded extends UserState {
   final List<UserEntity> users;
 
-  UserLoaded({required this.users});
+  const UserLoaded({required this.users});
   @override
   List<Object> get props => [users];
 }

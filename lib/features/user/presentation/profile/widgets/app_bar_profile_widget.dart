@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../core/utils/routes_manager.dart';
 import '../../../../../../../core/utils/values_manager.dart';
 import '../../../../../../core/utils/color_manager.dart';
 import '../../../../../../core/utils/constants_manager.dart';
+import '../../auth/cubit/auth/auth_cubit.dart';
 
 AppBar appBarProfileWidget(
   BuildContext context,
+  String userName
 ) {
   return AppBar(
     automaticallyImplyLeading: false,
-    title: const Text("User Name"),
+    title:  Text(userName),
     actions: [
       Padding(
         padding: const EdgeInsets.only(right: AppPadding.p12),
@@ -86,7 +89,11 @@ _openBottomModalSheet(
                   Padding(
                     padding: const EdgeInsets.only(left: 10.0),
                     child: GestureDetector(
-                      onTap: _logOut,
+                      onTap: () {
+                        BlocProvider.of<AuthCubit>(context).loggedOut();
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, Routes.loginRoute, (route) => false);
+                      },
                       child: const Text(
                         "Log Out",
                         style: TextStyle(
@@ -104,6 +111,3 @@ _openBottomModalSheet(
         );
       });
 }
-
-
-_logOut() {}

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../core/utils/assets_manager.dart';
 import '../../../../../../core/utils/color_manager.dart';
 import '../../../../../../core/utils/values_manager.dart';
+import '../../../../../core/widgets/image_profile_widget.dart';
+import '../../../domain/entities/user_entity.dart';
 
 class InfoUserWidget extends StatelessWidget {
-  const InfoUserWidget({super.key});
+  final UserEntity currentUser;
+  const InfoUserWidget({super.key, required this.currentUser});
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +20,8 @@ class InfoUserWidget extends StatelessWidget {
               width: AppSize.s90,
               height: AppSize.s90,
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(30),
-                child: Image.asset(
-                  ImageAssets.profileDefault,
-                  fit: BoxFit.cover,
-                ),
-              ),
+                  borderRadius: BorderRadius.circular(30),
+                  child: imageProfileWidget(image: currentUser.imageFile)),
             ),
             Positioned(
               right: -10,
@@ -43,7 +41,7 @@ class InfoUserWidget extends StatelessWidget {
             Column(
               children: [
                 Text(
-                  "0",
+                  "${currentUser.totalPosts}",
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const SizedBox(height: AppSize.s8),
@@ -57,7 +55,7 @@ class InfoUserWidget extends StatelessWidget {
             Column(
               children: [
                 Text(
-                  "88",
+                  "${currentUser.totalFollowers}",
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const SizedBox(height: AppSize.s8),
@@ -71,7 +69,7 @@ class InfoUserWidget extends StatelessWidget {
             Column(
               children: [
                 Text(
-                  "5",
+                  "${currentUser.totalFollowing}",
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const SizedBox(height: AppSize.s8),
