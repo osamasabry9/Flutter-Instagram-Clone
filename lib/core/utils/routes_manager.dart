@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram_clone/features/user/presentation/auth/cubit/auth/auth_cubit.dart';
 
 import '../../features/Comment/presentation/Screens/comment_screen.dart';
 import '../../features/Post/presentation/screen/update_post_screen.dart';
@@ -21,7 +23,7 @@ class Routes {
 
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
-   // final args = settings.arguments;
+    // final args = settings.arguments;
 
     switch (settings.name) {
       case Routes.splashRoute:
@@ -30,15 +32,39 @@ class RouteGenerator {
         );
       case Routes.loginRoute:
         return MaterialPageRoute(
-          builder: (_) => LoginScreen(),
+          builder: (context) {
+            return BlocBuilder<AuthCubit, AuthState>(
+              builder: (context, authState) {
+                if (authState is Authenticated) {
+                  return MainScreen(
+                    uid: authState.uid,
+                  );
+                } else {
+                  return const LoginScreen();
+                }
+              },
+            );
+          },
         );
       case Routes.registerRoute:
         return MaterialPageRoute(
-          builder: (_) => RegisterScreen(),
+          builder: (_) => const RegisterScreen(),
         );
       case Routes.mainRoute:
         return MaterialPageRoute(
-          builder: (_) => const MainScreen(),
+          builder: (context) {
+            return BlocBuilder<AuthCubit, AuthState>(
+              builder: (context, authState) {
+                if (authState is Authenticated) {
+                  return MainScreen(
+                    uid: authState.uid,
+                  );
+                } else {
+                  return const LoginScreen();
+                }
+              },
+            );
+          },
         );
       case Routes.editProfileRoute:
         return MaterialPageRoute(
