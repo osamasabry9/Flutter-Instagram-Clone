@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:instagram_clone/features/user/domain/usecases/upload_image_profile_to_storage_usecase.dart';
 
 import '../features/user/data/data_sources/user_remote_data_source.dart';
 import '../features/user/data/data_sources/user_remote_data_source_impl.dart';
@@ -95,8 +96,12 @@ Future<void> init() async {
       repository: instance.call(),
     ),
   );
+  instance.registerLazySingleton(
+    () => UploadImageProfileToStorageUseCase(repository: instance.call()),
+  );
 
-  // Repository
+
+  // -----------------------------Repository-----------------------
 
   instance.registerLazySingleton<UserFirebaseRepository>(
     () => UserFirebaseRepositoryImpl(userRemoteDataSource: instance.call()),
@@ -110,7 +115,7 @@ Future<void> init() async {
             firebaseStorage: instance.call(),
           ));
 
-  // Externals
+  //--------------------------- Externals-----------------------------------
 
   final firebaseFirestore = FirebaseFirestore.instance;
   final firebaseAuth = FirebaseAuth.instance;

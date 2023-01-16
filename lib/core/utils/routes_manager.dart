@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram_clone/features/user/domain/entities/user_entity.dart';
 import 'package:instagram_clone/features/user/presentation/auth/cubit/auth/auth_cubit.dart';
 
 import '../../features/Comment/presentation/Screens/comment_screen.dart';
@@ -23,7 +24,7 @@ class Routes {
 
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
-    // final args = settings.arguments;
+     var args = settings.arguments;
 
     switch (settings.name) {
       case Routes.splashRoute:
@@ -67,9 +68,16 @@ class RouteGenerator {
           },
         );
       case Routes.editProfileRoute:
-        return MaterialPageRoute(
-          builder: (_) => const EditProfileScreen(),
-        );
+        {
+          if (args is UserEntity) {
+            return routeBuilder(EditProfileScreen(
+              currentUser: args,
+            ));
+          } else {
+            return routeBuilder(const NoFoundScreen());
+          }
+        }
+
       case Routes.commentRoute:
         return MaterialPageRoute(
           builder: (_) => const CommentScreen(),
@@ -86,16 +94,31 @@ class RouteGenerator {
 
   static Route<dynamic> unDefinedRoute() {
     return MaterialPageRoute(
-      builder: (_) => Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            AppStrings.noRouteFound,
-          ),
+      builder: (_) => const NoFoundScreen(),
+    );
+  }
+}
+
+dynamic routeBuilder(Widget child) {
+  return MaterialPageRoute(builder: (context) => child);
+}
+
+class NoFoundScreen extends StatelessWidget {
+  const NoFoundScreen({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          AppStrings.noRouteFound,
         ),
-        body: const Center(
-          child: Text(
-            AppStrings.noRouteFound,
-          ),
+      ),
+      body: const Center(
+        child: Text(
+          AppStrings.noRouteFound,
         ),
       ),
     );
