@@ -20,8 +20,10 @@ class InfoUserWidget extends StatelessWidget {
               width: AppSize.s90,
               height: AppSize.s90,
               child: ClipRRect(
-                  borderRadius: BorderRadius.circular(30),
-                  child: imageProfileWidget(image: currentUser.imageFile)),
+                  borderRadius: BorderRadius.circular(45),
+                  child: imageProfileWidget(
+                      imageUrl: currentUser.profileUrl,
+                      image: currentUser.imageFile)),
             ),
             Positioned(
               right: -10,

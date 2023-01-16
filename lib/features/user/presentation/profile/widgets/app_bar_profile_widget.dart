@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram_clone/features/user/domain/entities/user_entity.dart';
 import '../../../../../../core/utils/routes_manager.dart';
 import '../../../../../../../core/utils/values_manager.dart';
 import '../../../../../../core/utils/color_manager.dart';
 import '../../../../../../core/utils/constants_manager.dart';
 import '../../auth/cubit/auth/auth_cubit.dart';
+import '../screen/edit_profile_screen.dart';
 
-AppBar appBarProfileWidget(
-  BuildContext context,
-  String userName
-) {
+AppBar appBarProfileWidget(BuildContext context, UserEntity currentUser) {
   return AppBar(
     automaticallyImplyLeading: false,
-    title:  Text(userName),
+    title: Text(currentUser.username.toString()),
     actions: [
       Padding(
         padding: const EdgeInsets.only(right: AppPadding.p12),
         child: InkWell(
           onTap: () {
-            _openBottomModalSheet(context);
+            _openBottomModalSheet(context, currentUser);
           },
           child: const Icon(
             Icons.menu,
@@ -29,9 +28,7 @@ AppBar appBarProfileWidget(
   );
 }
 
-_openBottomModalSheet(
-  BuildContext context,
-) {
+_openBottomModalSheet(BuildContext context, UserEntity currentUser) {
   return showModalBottomSheet(
       context: context,
       builder: (context) {
@@ -69,7 +66,11 @@ _openBottomModalSheet(
                     padding: const EdgeInsets.only(left: 10.0),
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, Routes.editProfileRoute);
+                        // debugPrint("Edit Profile");
+                        Navigator.push(
+                            context,
+                            routeBuilder(
+                                EditProfileScreen(currentUser: currentUser)));
                       },
                       child: const Text(
                         "Edit Profile",

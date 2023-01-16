@@ -7,7 +7,7 @@ class InputEditProfileWidget extends StatelessWidget {
   final String label;
   final bool isProfile;
 
-  final TextEditingController textController;
+  final TextEditingController? textController;
 
   const InputEditProfileWidget({
     Key? key,
