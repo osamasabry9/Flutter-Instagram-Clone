@@ -19,6 +19,5 @@ abstract class UserFirebaseRepository {
   Future<void> followUnFollowUser(UserEntity user);
 
   // Cloud Storage Feature
-  Future<String> uploadImageToStorage(
-      File? file, String childName);
+  Future<String> uploadImageProfileToStorage(File? file);
 }
