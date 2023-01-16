@@ -1,38 +1,49 @@
+// ignore_for_file: invalid_use_of_visible_for_testing_member
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:instagram_clone/features/user/domain/entities/user_entity.dart';
+import 'package:instagram_clone/features/user/domain/usecases/upload_image_profile_to_storage_usecase.dart';
 
 import '../../../../../../core/utils/color_manager.dart';
 import '../../../../../../core/utils/constants_manager.dart';
 import '../../../../../../core/utils/values_manager.dart';
 import '../../../../../core/widgets/image_profile_widget.dart';
+import '../cubit/user_cubit.dart';
 import '../widgets/input_edit_profile_widget.dart';
+import '../../../../../app/di.dart' as di;
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({
     Key? key,
+    required this.currentUser,
   }) : super(key: key);
+
+  final UserEntity currentUser;
 
   @override
   State<EditProfileScreen> createState() => _EditProfileScreenState();
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  late TextEditingController _nameController;
-  late TextEditingController _usernameController;
-  late TextEditingController _websiteController;
-  late TextEditingController _bioController;
-
-  final bool _isUpdating = false;
-
   File? _image;
+  bool _isUpdating = false;
+  TextEditingController? _nameController;
+  TextEditingController? _usernameController;
+  TextEditingController? _websiteController;
+  TextEditingController? _bioController;
+
   @override
   void initState() {
-    _nameController = TextEditingController(text: " ");
-    _usernameController = TextEditingController(text: " ");
-    _websiteController = TextEditingController(text: " ");
-    _bioController = TextEditingController(text: " ");
+    _nameController = TextEditingController(text: widget.currentUser.name);
+    _usernameController =
+        TextEditingController(text: widget.currentUser.username);
+    _websiteController =
+        TextEditingController(text: widget.currentUser.website);
+    _bioController = TextEditingController(text: widget.currentUser.bio);
     super.initState();
   }
 
@@ -49,8 +60,48 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         }
       });
     } catch (e) {
-      debugPrint("some error ${e.toString()}");
+      AppConstants.toast("some error occurred $e");
     }
+  }
+
+  _updateUserProfileData() {
+    setState(() => _isUpdating = true);
+    if (_image == null) {
+      _updateUserProfile("");
+    } else {
+      di
+          .instance<UploadImageProfileToStorageUseCase>()
+          .call(
+            _image!,
+          )
+          .then((profileUrl) {
+        _updateUserProfile(profileUrl);
+      });
+    }
+  }
+
+  _updateUserProfile(String profileUrl) {
+    BlocProvider.of<UserCubit>(context)
+        .updateUser(
+            user: UserEntity(
+                uid: widget.currentUser.uid,
+                username: _usernameController!.text,
+                bio: _bioController!.text,
+                website: _websiteController!.text,
+                name: _nameController!.text,
+                profileUrl: profileUrl))
+        .then((value) => _clear());
+  }
+
+  _clear() {
+    setState(() {
+      _isUpdating = false;
+      _usernameController!.clear();
+      _bioController!.clear();
+      _websiteController!.clear();
+      _nameController!.clear();
+    });
+    Navigator.pop(context);
   }
 
   @override
@@ -89,7 +140,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   height: 100,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(50),
-                    child: imageProfileWidget(imageUrl: "", image: _image),
+                    child: imageProfileWidget(
+                        imageUrl: widget.currentUser.profileUrl, image: _image),
                   ),
                 ),
               ),
@@ -108,25 +160,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ),
               AppConstants.sizeVer(AppSize.s12),
               InputEditProfileWidget(
-                textController: _nameController,
-                label: "Name",
-              ),
+                  label: "Name", textController: _nameController),
               AppConstants.sizeVer(AppSize.s12),
               InputEditProfileWidget(
-                textController: _usernameController,
-                label: "User name",
-              ),
+                  label: "Username", textController: _usernameController),
               AppConstants.sizeVer(AppSize.s12),
               InputEditProfileWidget(
-                textController: _websiteController,
-                label: "Web site",
-              ),
+                  label: "Website", textController: _websiteController),
               AppConstants.sizeVer(AppSize.s12),
               InputEditProfileWidget(
-                textController: _bioController,
-                label: "Bio",
-              ),
-              AppConstants.sizeVer(AppSize.s8),
+                  label: "Bio", textController: _bioController),
+              AppConstants.sizeVer(10),
               _isUpdating == true
                   ? Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -135,22 +179,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           "Please wait...",
                           style: TextStyle(color: Colors.white),
                         ),
-                        AppConstants.sizeHor(AppSize.s12),
+                        AppConstants.sizeHor(10),
                         const CircularProgressIndicator()
                       ],
                     )
-                  : const SizedBox(
-                      width: 0,
-                      height: 0,
-                    )
+                  : const SizedBox()
             ],
           ),
         ),
       ),
     );
   }
-
-  _updateUserProfileData() {}
-
 }
-
