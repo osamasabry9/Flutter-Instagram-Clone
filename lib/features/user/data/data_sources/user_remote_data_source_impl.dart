@@ -148,7 +148,7 @@ class UserFirebaseRemoteDataSourceImpl implements UserFirebaseRemoteDataSource {
           .then((currentUser) async {
         if (currentUser.user?.uid != null) {
           if (user.imageFile != null) {
-            uploadImageToStorage(user.imageFile, "profileImages")
+            uploadImageProfileToStorage(user.imageFile)
                 .then((profileUrl) {
               createUserWithImage(user, profileUrl);
             });
@@ -206,10 +206,11 @@ class UserFirebaseRemoteDataSourceImpl implements UserFirebaseRemoteDataSource {
   }
 
   @override
-  Future<String> uploadImageToStorage(File? file, String childName) async {
+  Future<String> uploadImageProfileToStorage(
+      File? file) async {
     Reference ref = firebaseStorage
         .ref()
-        .child(childName)
+        .child("profileImages")
         .child(firebaseAuth.currentUser!.uid);
 
     final uploadTask = ref.putFile(file!);
