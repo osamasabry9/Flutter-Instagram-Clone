@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_use_of_visible_for_testing_member
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -36,7 +38,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   final TextEditingController _userNameController = TextEditingController();
   bool _isSigningUp = false;
-  bool _isUploading = false;
+  final bool _isUploading = false;
 
   @override
   void dispose() {
