@@ -47,10 +47,10 @@ class UserFirebaseRepositoryImpl implements UserFirebaseRepository {
       userRemoteDataSource.updateUser(user);
 
   @override
-  Future<String> uploadImageToStorage(File? file, String childName) async =>
-      userRemoteDataSource.uploadImageToStorage(file, childName);
-
-  @override
   Future<void> followUnFollowUser(UserEntity user) async =>
       userRemoteDataSource.followUnFollowUser(user);
+
+  @override
+  Future<String> uploadImageProfileToStorage(File? file,) async =>
+      userRemoteDataSource.uploadImageProfileToStorage(file);
 }
