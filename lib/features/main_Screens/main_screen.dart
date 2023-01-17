@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icons_plus/icons_plus.dart';
 
 import '../../core/utils/color_manager.dart';
-import '../Post/presentation/screen/post_screen.dart';
+import '../Post/presentation/screen/upload_post_screen.dart';
 import '../user/presentation/profile/cubit/get_single_user/get_single_user_cubit.dart';
 import '../user/presentation/profile/screen/profile_screen.dart';
 import 'Screens/activity/screen/activity_screen.dart';
@@ -81,7 +81,7 @@ class _MainScreenState extends State<MainScreen> {
               children:  [
                 const HomeScreen(),
                 const SearchScreen(),
-                const PostScreen(),
+                 UploadPostScreen(currentUser: currentUser),
                 const ActivityScreen(),
                 ProfileScreen(currentUser: currentUser),
               ],

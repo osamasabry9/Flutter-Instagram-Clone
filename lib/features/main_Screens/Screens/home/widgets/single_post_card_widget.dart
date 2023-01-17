@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icons_plus/icons_plus.dart';
 
 import '../../../../../core/utils/color_manager.dart';
@@ -7,23 +8,39 @@ import '../../../../../core/utils/routes_manager.dart';
 import '../../../../../core/utils/values_manager.dart';
 import '../../../../../core/widgets/image_profile_widget.dart';
 import '../../../../../core/widgets/like_animation_widget.dart';
+import '../../../../Post/domain/entities/post_entity.dart';
+import 'package:intl/intl.dart';
+import '../../../../../app/di.dart' as di;
+import '../../../../Post/presentation/cubit/post_cubit.dart';
+import '../../../../user/domain/usecases/get_current_uid_usecase.dart';
 
 class SinglePostCardWidget extends StatefulWidget {
-  const SinglePostCardWidget({
-    Key? key,
-  }) : super(key: key);
+  final PostEntity post;
+  const SinglePostCardWidget({Key? key, required this.post}) : super(key: key);
 
   @override
   State<SinglePostCardWidget> createState() => _SinglePostCardWidgetState();
 }
 
 class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
+  String _currentUid = "";
+
+  @override
+  void initState() {
+    di.instance<GetCurrentUidUseCase>().call().then((value) {
+      setState(() {
+        _currentUid = value;
+      });
+    });
+    super.initState();
+  }
+
   bool _isLikeAnimating = false;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
+      padding: const EdgeInsets.all(AppSize.s10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -35,31 +52,37 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
                 child: Row(
                   children: [
                     SizedBox(
-                      width: 30,
-                      height: 30,
+                      width: AppSize.s30,
+                      height: AppSize.s30,
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: imageProfileWidget(imageUrl: ""),
+                        borderRadius: BorderRadius.circular(AppSize.s15),
+                        child: imageProfileWidget(
+                            imageUrl: "${widget.post.userProfileUrl}"),
                       ),
                     ),
                     AppConstants.sizeHor(AppSize.s12),
-                    const Text(
-                      "username",
-                      style: TextStyle(
+                    Text(
+                      "${widget.post.username}",
+                      style: const TextStyle(
                           color: ColorManager.white,
                           fontWeight: FontWeight.bold),
                     )
                   ],
                 ),
               ),
-              GestureDetector(
-                onTap: () {
-                  _openBottomModalSheet(context);
-                },
-                child: const Icon(
-                  Icons.more_vert,
-                ),
-              ),
+              widget.post.creatorUid == _currentUid
+                  ? GestureDetector(
+                      onTap: () {
+                        _openBottomModalSheet(context,  widget.post);
+                      },
+                      child: const Icon(
+                        Icons.more_vert,
+                      ),
+                    )
+                  : const SizedBox(
+                      width: 0,
+                      height: 0,
+                    ),
             ],
           ),
           AppConstants.sizeVer(AppSize.s4),
@@ -75,13 +98,9 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
               children: [
                 SizedBox(
                   width: double.infinity,
-                  height: MediaQuery.of(context).size.height * 0.5,
-                  child: const Image(
-                    image: NetworkImage(
-                      'https://image.freepik.com/free-photo/horizontal-shot-smiling-curly-haired-woman-indicates-free-space-demonstrates-place-your-advertisement-attracts-attention-sale-wears-green-turtleneck-isolated-vibrant-pink-wall_273609-42770.jpg',
-                    ),
-                    fit: BoxFit.cover,
-                  ),
+                  height: MediaQuery.of(context).size.height * 0.30,
+                  child: imageProfileWidget(
+                      imageUrl: "${widget.post.postImageUrl}"),
                 ),
                 AnimatedOpacity(
                   duration: const Duration(milliseconds: 200),
@@ -114,11 +133,16 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
                 Row(
                   children: [
                     GestureDetector(
-                        onTap: _likePost,
-                        child: const Icon(
-                          Icons.favorite_outline,
-                          size: AppSize.s25,
-                        )),
+                      onTap: _likePost,
+                      child: Icon(
+                        widget.post.likes!.contains(_currentUid)
+                            ? Icons.favorite
+                            : Icons.favorite_outline,
+                        color: widget.post.likes!.contains(_currentUid)
+                            ? ColorManager.error
+                            : ColorManager.white,
+                      ),
+                    ),
                     AppConstants.sizeHor(AppSize.s14),
                     GestureDetector(
                         onTap: () {
@@ -148,37 +172,37 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
               ],
             ),
           ),
-          const Text(
-            "total Likes",
-            style: TextStyle(
+          Text(
+            "${widget.post.totalLikes} likes",
+            style: const TextStyle(
                 color: ColorManager.white, fontWeight: FontWeight.bold),
           ),
           AppConstants.sizeVer(AppSize.s4),
           Row(
             children: [
-              const Text(
-                "Username",
-                style: TextStyle(
+              Text(
+                "${widget.post.username}",
+                style: const TextStyle(
                     color: ColorManager.white, fontWeight: FontWeight.bold),
               ),
               AppConstants.sizeHor(AppSize.s12),
-              const Text(
-                "post description",
-                style: TextStyle(color: ColorManager.white),
+              Text(
+                "${widget.post.description}",
+                style: const TextStyle(color: ColorManager.white),
               ),
             ],
           ),
           AppConstants.sizeVer(AppSize.s4),
           GestureDetector(
               onTap: () {},
-              child: const Text(
-                "View all  comments",
-                style: TextStyle(color: ColorManager.grey),
+              child: Text(
+                "View all ${widget.post.totalComments} comments",
+                style: const TextStyle(color: ColorManager.grey),
               )),
           AppConstants.sizeVer(AppSize.s4),
-          const Text(
-            "22/22/2022",
-            style: TextStyle(color: ColorManager.grey),
+          Text(
+            DateFormat("dd/MMM/yyy").format(widget.post.createAt!.toDate()),
+            style: const TextStyle(color: ColorManager.grey),
           ),
         ],
       ),
@@ -187,6 +211,7 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
 
   _openBottomModalSheet(
     BuildContext context,
+     final PostEntity post,
   ) {
     return showModalBottomSheet(
         context: context,
@@ -244,7 +269,7 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
                       padding: const EdgeInsets.only(left: 10.0),
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, Routes.updatePostRoute);
+                          Navigator.pushNamed(context, Routes.updatePostRoute , arguments: post);
                         },
                         child: const Text(
                           "Update Post",
@@ -264,7 +289,13 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
         });
   }
 
-  _deletePost() {}
+  _deletePost() {
+    BlocProvider.of<PostCubit>(context)
+        .deletePost(post: PostEntity(postId: widget.post.postId));
+  }
 
-  _likePost() {}
+  _likePost() {
+    BlocProvider.of<PostCubit>(context)
+        .likePost(post: PostEntity(postId: widget.post.postId));
+  }
 }
