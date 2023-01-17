@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram_clone/features/Post/domain/entities/post_entity.dart';
 import 'package:instagram_clone/features/user/domain/entities/user_entity.dart';
 import 'package:instagram_clone/features/user/presentation/auth/cubit/auth/auth_cubit.dart';
 
 import '../../features/Comment/presentation/Screens/comment_screen.dart';
 import '../../features/Post/presentation/screen/update_post_screen.dart';
+import '../../features/Post/presentation/screen/upload_post_screen.dart';
 import '../../features/user/presentation/auth/screens/login_screen.dart';
 import '../../features/user/presentation/auth/screens/register_screen.dart';
 import '../../features/user/presentation/profile/screen/edit_profile_screen.dart';
@@ -20,11 +22,12 @@ class Routes {
   static const String editProfileRoute = '/editProfile';
   static const String commentRoute = '/comment';
   static const String updatePostRoute = '/updatePost';
+  static const String uploadPostRoute = '/uploadPost';
 }
 
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
-     var args = settings.arguments;
+    var args = settings.arguments;
 
     switch (settings.name) {
       case Routes.splashRoute:
@@ -77,14 +80,30 @@ class RouteGenerator {
             return routeBuilder(const NoFoundScreen());
           }
         }
+      case Routes.uploadPostRoute:
+        {
+          if (args is UserEntity) {
+            return routeBuilder(UploadPostScreen(
+              currentUser: args,
+            ));
+          } else {
+            return routeBuilder(const NoFoundScreen());
+          }
+        }
 
+      case Routes.updatePostRoute:
+        {
+          if (args is PostEntity) {
+            return routeBuilder(UpdatePostScreen(
+              post: args,
+            ));
+          } else {
+            return routeBuilder(const NoFoundScreen());
+          }
+        }
       case Routes.commentRoute:
         return MaterialPageRoute(
           builder: (_) => const CommentScreen(),
-        );
-      case Routes.updatePostRoute:
-        return MaterialPageRoute(
-          builder: (_) => const UpdatePostScreen(),
         );
 
       default:
