@@ -3,17 +3,23 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:instagram_clone/features/Post/domain/entities/post_entity.dart';
+import 'package:instagram_clone/features/Post/domain/usecases/upload_image_post_usecase.dart';
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/constants_manager.dart';
 import '../../../../core/utils/values_manager.dart';
-
+import '../../../../../app/di.dart' as di;
 import '../../../../core/widgets/image_profile_widget.dart';
 import '../../../user/presentation/profile/widgets/input_edit_profile_widget.dart';
+import '../cubit/post_cubit.dart';
 
 class UpdatePostMainWidget extends StatefulWidget {
+   final PostEntity post;
   const UpdatePostMainWidget({
     Key? key,
+    required this.post,
   }) : super(key: key);
 
   @override
@@ -25,7 +31,7 @@ class _UpdatePostMainWidgetState extends State<UpdatePostMainWidget> {
 
   @override
   void initState() {
-    _descriptionController = TextEditingController(text: "");
+    _descriptionController = TextEditingController(text: widget.post.description);
     super.initState();
   }
 
@@ -82,12 +88,12 @@ class _UpdatePostMainWidgetState extends State<UpdatePostMainWidget> {
                 height: AppSize.s100,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(AppSize.s50),
-                  child: imageProfileWidget(imageUrl: ""),
+                  child: imageProfileWidget(imageUrl: widget.post.userProfileUrl),
                 ),
               ),
               AppConstants.sizeVer(AppSize.s10),
               Text(
-                "Username",
+                "${widget.post.username}",
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               AppConstants.sizeVer(AppSize.s10),
@@ -96,7 +102,7 @@ class _UpdatePostMainWidgetState extends State<UpdatePostMainWidget> {
                   SizedBox(
                     width: double.infinity,
                     height: AppSize.s200,
-                    child: imageProfileWidget(imageUrl: "", image: _image),
+                    child: imageProfileWidget(imageUrl: widget.post.postImageUrl, image: _image),
                   ),
                   Positioned(
                     top: AppSize.s16,
@@ -150,14 +156,29 @@ class _UpdatePostMainWidgetState extends State<UpdatePostMainWidget> {
     );
   }
 
-  _updatePost() {
+ _updatePost() {
     setState(() {
       _uploading = true;
     });
+    if (_image == null) {
+      _submitUpdatePost(image: widget.post.postImageUrl!);
+    } else {
+      di.instance<UploadImagePostUseCase>().call(_image!).then((imageUrl) {
+        _submitUpdatePost(image: imageUrl);
+      });
+    }
   }
 
+
   _submitUpdatePost({required String image}) {
-    _clear();
+    BlocProvider.of<PostCubit>(context).updatePost(
+        post: PostEntity(
+            creatorUid: widget.post.creatorUid,
+            postId: widget.post.postId,
+            postImageUrl: image,
+            description: _descriptionController!.text
+        )
+    ).then((value) => _clear());
   }
 
   _clear() {
@@ -167,4 +188,5 @@ class _UpdatePostMainWidgetState extends State<UpdatePostMainWidget> {
       _uploading = false;
     });
   }
+
 }
