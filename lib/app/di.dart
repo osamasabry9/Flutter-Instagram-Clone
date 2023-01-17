@@ -2,8 +2,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:instagram_clone/features/Post/domain/usecases/upload_image_post_usecase.dart';
 import 'package:instagram_clone/features/user/domain/usecases/upload_image_profile_to_storage_usecase.dart';
 
+import '../features/Post/data/data_sources/post_remote_data_source.dart';
+import '../features/Post/data/data_sources/post_remote_data_source_impl.dart';
+import '../features/Post/data/repository/post_firebase_repository_impl.dart';
+import '../features/Post/domain/repository/post_firebase_repository.dart';
+import '../features/Post/domain/usecases/create_post_usecase.dart';
+import '../features/Post/domain/usecases/delete_post_usecase.dart';
+import '../features/Post/domain/usecases/like_post_usecase.dart';
+import '../features/Post/domain/usecases/read_posts_usecase.dart';
+import '../features/Post/domain/usecases/read_single_post_usecase.dart';
+import '../features/Post/domain/usecases/update_post_usecase.dart';
+import '../features/Post/presentation/cubit/get_single_post/get_single_post_cubit.dart';
+import '../features/Post/presentation/cubit/post_cubit.dart';
 import '../features/user/data/data_sources/user_remote_data_source.dart';
 import '../features/user/data/data_sources/user_remote_data_source_impl.dart';
 import '../features/user/data/repository/user_firebase_repository_impl.dart';
@@ -29,6 +42,8 @@ final instance = GetIt.instance;
 
 Future<void> init() async {
 // ------------------------Cubits-----------------------------
+
+  //++++++++++++++++++ User Cubit Injection
   instance.registerFactory(
     () => AuthCubit(
       signOutUseCase: instance.call(),
@@ -52,64 +67,87 @@ Future<void> init() async {
   );
 
   instance.registerFactory(
-    () => GetSingleUserCubit(getSingleUserUseCase: instance.call()),
+      () => GetSingleUserCubit(getSingleUserUseCase: instance.call()));
+
+  instance.registerFactory(() =>
+      GetSingleOtherUserCubit(getSingleOtherUserUseCase: instance.call()));
+
+  // Post Cubit Injection
+  instance.registerFactory(
+    () => PostCubit(
+        createPostUseCase: instance.call(),
+        deletePostUseCase: instance.call(),
+        likePostUseCase: instance.call(),
+        readPostUseCase: instance.call(),
+        updatePostUseCase: instance.call()),
   );
 
   instance.registerFactory(
-    () => GetSingleOtherUserCubit(getSingleOtherUserUseCase: instance.call()),
+    () => GetSinglePostCubit(readSinglePostUseCase: instance.call()),
   );
 
   // --------------------------Use Cases--------------------
-  // User
-  instance.registerLazySingleton(
-    () => SignOutUseCase(repository: instance.call()),
-  );
-  instance.registerLazySingleton(
-    () => IsSignInUseCase(repository: instance.call()),
-  );
-  instance.registerLazySingleton(
-    () => GetCurrentUidUseCase(repository: instance.call()),
-  );
-  instance.registerLazySingleton(
-    () => SignUpUseCase(repository: instance.call()),
-  );
-  instance.registerLazySingleton(
-    () => SignInUserUseCase(repository: instance.call()),
-  );
-  instance.registerLazySingleton(
-    () => UpdateUserUseCase(repository: instance.call()),
-  );
-  instance.registerLazySingleton(
-    () => GetUsersUseCase(repository: instance.call()),
-  );
-  instance.registerLazySingleton(
-    () => CreateUserUseCase(repository: instance.call()),
-  );
-  instance.registerLazySingleton(
-    () => GetSingleUserUseCase(repository: instance.call()),
-  );
-  instance.registerLazySingleton(
-    () => FollowUnFollowUseCase(repository: instance.call()),
-  );
-  instance.registerLazySingleton(
-    () => GetSingleOtherUserUseCase(
-      repository: instance.call(),
-    ),
-  );
-  instance.registerLazySingleton(
-    () => UploadImageProfileToStorageUseCase(repository: instance.call()),
-  );
 
+  //++++++++++++++++++ User
+  instance
+      .registerLazySingleton(() => SignOutUseCase(repository: instance.call()));
+  instance.registerLazySingleton(
+      () => IsSignInUseCase(repository: instance.call()));
+  instance.registerLazySingleton(
+      () => GetCurrentUidUseCase(repository: instance.call()));
+  instance
+      .registerLazySingleton(() => SignUpUseCase(repository: instance.call()));
+  instance.registerLazySingleton(
+      () => SignInUserUseCase(repository: instance.call()));
+  instance.registerLazySingleton(
+      () => UpdateUserUseCase(repository: instance.call()));
+  instance.registerLazySingleton(
+      () => GetUsersUseCase(repository: instance.call()));
+  instance.registerLazySingleton(
+      () => CreateUserUseCase(repository: instance.call()));
+  instance.registerLazySingleton(
+      () => GetSingleUserUseCase(repository: instance.call()));
+  instance.registerLazySingleton(
+      () => FollowUnFollowUseCase(repository: instance.call()));
+  instance.registerLazySingleton(
+      () => GetSingleOtherUserUseCase(repository: instance.call()));
+  instance.registerLazySingleton(
+      () => UploadImageProfileToStorageUseCase(repository: instance.call()));
+
+  // ++++++++++++++++++ Post
+  instance.registerLazySingleton(
+      () => CreatePostUseCase(repository: instance.call()));
+  instance.registerLazySingleton(
+      () => ReadPostsUseCase(repository: instance.call()));
+  instance.registerLazySingleton(
+      () => LikePostUseCase(repository: instance.call()));
+  instance.registerLazySingleton(
+      () => UpdatePostUseCase(repository: instance.call()));
+  instance.registerLazySingleton(
+      () => DeletePostUseCase(repository: instance.call()));
+  instance.registerLazySingleton(
+      () => ReadSinglePostUseCase(repository: instance.call()));
+  instance.registerLazySingleton(
+      () => UploadImagePostUseCase(repository: instance.call()));
 
   // -----------------------------Repository-----------------------
 
   instance.registerLazySingleton<UserFirebaseRepository>(
     () => UserFirebaseRepositoryImpl(userRemoteDataSource: instance.call()),
   );
+  instance.registerLazySingleton<PostFirebaseRepository>(
+    () => PostFirebaseRepositoryImpl(postRemoteDataSource: instance.call()),
+  );
 
-  // Remote Data Source
+  // -------------------------------- Remote Data Source
   instance.registerLazySingleton<UserFirebaseRemoteDataSource>(
       () => UserFirebaseRemoteDataSourceImpl(
+            firebaseFirestore: instance.call(),
+            firebaseAuth: instance.call(),
+            firebaseStorage: instance.call(),
+          ));
+  instance.registerLazySingleton<PostFirebaseRemoteDataSource>(
+      () => PostFirebaseRemoteDataSourceImpl(
             firebaseFirestore: instance.call(),
             firebaseAuth: instance.call(),
             firebaseStorage: instance.call(),
