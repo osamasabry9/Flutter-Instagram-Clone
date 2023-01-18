@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icons_plus/icons_plus.dart';
 
+import '../../../../../app/app_entity.dart';
 import '../../../../../core/utils/color_manager.dart';
 import '../../../../../core/utils/constants_manager.dart';
 import '../../../../../core/utils/routes_manager.dart';
@@ -73,7 +74,7 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
               widget.post.creatorUid == _currentUid
                   ? GestureDetector(
                       onTap: () {
-                        _openBottomModalSheet(context,  widget.post);
+                        _openBottomModalSheet(context, widget.post);
                       },
                       child: const Icon(
                         Icons.more_vert,
@@ -146,7 +147,10 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
                     AppConstants.sizeHor(AppSize.s14),
                     GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, Routes.commentRoute);
+                          Navigator.pushNamed(context, Routes.commentRoute,
+                              arguments: AppEntity(
+                                  uid: _currentUid,
+                                  postId: widget.post.postId));
                         },
                         child: const Icon(
                           Bootstrap.chat,
@@ -194,7 +198,11 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
           ),
           AppConstants.sizeVer(AppSize.s4),
           GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, Routes.commentRoute,
+                    arguments: AppEntity(
+                        uid: _currentUid, postId: widget.post.postId));
+              },
               child: Text(
                 "View all ${widget.post.totalComments} comments",
                 style: const TextStyle(color: ColorManager.grey),
@@ -211,7 +219,7 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
 
   _openBottomModalSheet(
     BuildContext context,
-     final PostEntity post,
+    final PostEntity post,
   ) {
     return showModalBottomSheet(
         context: context,
@@ -269,7 +277,8 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
                       padding: const EdgeInsets.only(left: 10.0),
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, Routes.updatePostRoute , arguments: post);
+                          Navigator.pushNamed(context, Routes.updatePostRoute,
+                              arguments: post);
                         },
                         child: const Text(
                           "Update Post",

@@ -5,6 +5,7 @@ import 'package:instagram_clone/core/utils/constants_manager.dart';
 import '../../../../Post/domain/entities/post_entity.dart';
 import '../../../../Post/presentation/cubit/post_cubit.dart';
 import '../widgets/app_bar_widget.dart';
+import '../widgets/no_posts_yet_widget.dart';
 import '../widgets/single_post_card_widget.dart';
 import '../../../../../app/di.dart' as di;
 
@@ -31,7 +32,7 @@ class HomeScreen extends StatelessWidget {
             }
             if (postState is PostLoaded) {
               return postState.posts.isEmpty
-                  ? _noPostsYetWidget()
+                  ? const NoPostsYetWidget()
                   : ListView.builder(
                       itemCount: postState.posts.length,
                       itemBuilder: (context, index) {
@@ -52,13 +53,4 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  _noPostsYetWidget() {
-    return const Center(
-      child: Text(
-        "No Posts Yet",
-        style: TextStyle(
-            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
-      ),
-    );
-  }
 }
