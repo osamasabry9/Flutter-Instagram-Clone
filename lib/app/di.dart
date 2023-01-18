@@ -5,6 +5,16 @@ import 'package:get_it/get_it.dart';
 import 'package:instagram_clone/features/Post/domain/usecases/upload_image_post_usecase.dart';
 import 'package:instagram_clone/features/user/domain/usecases/upload_image_profile_to_storage_usecase.dart';
 
+import '../features/Comment/data/data_sources/comment_remote_data_source.dart';
+import '../features/Comment/data/data_sources/comment_remote_data_source_impl.dart';
+import '../features/Comment/data/repository/comment_firebase_repository_impl.dart';
+import '../features/Comment/domain/repository/comment_firebase_repository.dart';
+import '../features/Comment/domain/usecases/create_comment_usecase.dart';
+import '../features/Comment/domain/usecases/delete_comment_usecase.dart';
+import '../features/Comment/domain/usecases/like_comment_usecase.dart';
+import '../features/Comment/domain/usecases/read_comment_usecase.dart';
+import '../features/Comment/domain/usecases/update_comment_usecase.dart';
+import '../features/Comment/presentation/cubit/comment_cubit.dart';
 import '../features/Post/data/data_sources/post_remote_data_source.dart';
 import '../features/Post/data/data_sources/post_remote_data_source_impl.dart';
 import '../features/Post/data/repository/post_firebase_repository_impl.dart';
@@ -85,10 +95,20 @@ Future<void> init() async {
   instance.registerFactory(
     () => GetSinglePostCubit(readSinglePostUseCase: instance.call()),
   );
+  // Comment Cubit Injection
+  instance.registerFactory(
+    () => CommentCubit(
+      createCommentUseCase: instance.call(),
+      deleteCommentUseCase: instance.call(),
+      likeCommentUseCase: instance.call(),
+      readCommentsUseCase: instance.call(),
+      updateCommentUseCase: instance.call(),
+    ),
+  );
 
   // --------------------------Use Cases--------------------
 
-  //++++++++++++++++++ User
+  //++++++++++++++++++++++++++++++++++++  User ++++++++++++++++++++++++++++++++++++
   instance
       .registerLazySingleton(() => SignOutUseCase(repository: instance.call()));
   instance.registerLazySingleton(
@@ -114,7 +134,7 @@ Future<void> init() async {
   instance.registerLazySingleton(
       () => UploadImageProfileToStorageUseCase(repository: instance.call()));
 
-  // ++++++++++++++++++ Post
+  // ++++++++++++++++++++++++++++++++++++  Post ++++++++++++++++++++++++++++++++++++
   instance.registerLazySingleton(
       () => CreatePostUseCase(repository: instance.call()));
   instance.registerLazySingleton(
@@ -130,6 +150,19 @@ Future<void> init() async {
   instance.registerLazySingleton(
       () => UploadImagePostUseCase(repository: instance.call()));
 
+  //++++++++++++++++++++++++++++++++++++  Comment ++++++++++++++++++++++++++++++++++++
+
+  instance.registerLazySingleton(
+      () => CreateCommentUseCase(repository: instance.call()));
+  instance.registerLazySingleton(
+      () => ReadCommentsUseCase(repository: instance.call()));
+  instance.registerLazySingleton(
+      () => LikeCommentUseCase(repository: instance.call()));
+  instance.registerLazySingleton(
+      () => UpdateCommentUseCase(repository: instance.call()));
+  instance.registerLazySingleton(
+      () => DeleteCommentUseCase(repository: instance.call()));
+
   // -----------------------------Repository-----------------------
 
   instance.registerLazySingleton<UserFirebaseRepository>(
@@ -137,6 +170,9 @@ Future<void> init() async {
   );
   instance.registerLazySingleton<PostFirebaseRepository>(
     () => PostFirebaseRepositoryImpl(postRemoteDataSource: instance.call()),
+  );
+  instance.registerLazySingleton<CommentFirebaseRepository>(
+    () => CommentFirebaseRepositoryImpl(remoteDataSource: instance.call()),
   );
 
   // -------------------------------- Remote Data Source
@@ -152,7 +188,12 @@ Future<void> init() async {
             firebaseAuth: instance.call(),
             firebaseStorage: instance.call(),
           ));
-
+  instance.registerLazySingleton<CommentFirebaseRemoteDataSource>(
+      () => CommentFirebaseRemoteDataSourceImpl(
+            firebaseFirestore: instance.call(),
+            firebaseAuth: instance.call(),
+            firebaseStorage: instance.call(),
+          ));
   //--------------------------- Externals-----------------------------------
 
   final firebaseFirestore = FirebaseFirestore.instance;
