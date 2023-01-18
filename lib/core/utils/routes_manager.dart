@@ -4,7 +4,10 @@ import 'package:instagram_clone/features/Post/domain/entities/post_entity.dart';
 import 'package:instagram_clone/features/user/domain/entities/user_entity.dart';
 import 'package:instagram_clone/features/user/presentation/auth/cubit/auth/auth_cubit.dart';
 
+import '../../app/app_entity.dart';
+import '../../features/Comment/domain/entities/comment_entity.dart';
 import '../../features/Comment/presentation/Screens/comment_screen.dart';
+import '../../features/Comment/presentation/Screens/edit_comment_screen.dart';
 import '../../features/Post/presentation/screen/update_post_screen.dart';
 import '../../features/Post/presentation/screen/upload_post_screen.dart';
 import '../../features/user/presentation/auth/screens/login_screen.dart';
@@ -21,6 +24,7 @@ class Routes {
   static const String mainRoute = '/main';
   static const String editProfileRoute = '/editProfile';
   static const String commentRoute = '/comment';
+  static const String uploadCommentRoute = '/uploadComment';
   static const String updatePostRoute = '/updatePost';
   static const String uploadPostRoute = '/uploadPost';
 }
@@ -102,9 +106,23 @@ class RouteGenerator {
           }
         }
       case Routes.commentRoute:
-        return MaterialPageRoute(
-          builder: (_) => const CommentScreen(),
-        );
+        {
+          if (args is AppEntity) {
+            return routeBuilder(CommentScreen(
+              appEntity: args,
+            ));
+          }
+          return routeBuilder(const NoFoundScreen());
+        }
+        case Routes.uploadCommentRoute:
+        {
+          if (args is CommentEntity) {
+            return routeBuilder(EditCommentScreen(
+              comment:args,
+            ));
+          }
+          return routeBuilder(const NoFoundScreen());
+        }
 
       default:
         return unDefinedRoute();
