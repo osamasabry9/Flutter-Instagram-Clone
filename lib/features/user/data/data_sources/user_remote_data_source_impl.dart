@@ -10,12 +10,12 @@ import '../../domain/entities/user_entity.dart';
 import '../../../../core/utils/constants_manager.dart';
 import '../models/user_model.dart';
 
-class UserFirebaseRemoteDataSourceImpl implements UserFirebaseRemoteDataSource {
+class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   final FirebaseFirestore firebaseFirestore;
   final FirebaseAuth firebaseAuth;
   final FirebaseStorage firebaseStorage;
 
-  UserFirebaseRemoteDataSourceImpl(
+  UserRemoteDataSourceImpl(
       {required this.firebaseStorage,
       required this.firebaseFirestore,
       required this.firebaseAuth});
@@ -148,8 +148,7 @@ class UserFirebaseRemoteDataSourceImpl implements UserFirebaseRemoteDataSource {
           .then((currentUser) async {
         if (currentUser.user?.uid != null) {
           if (user.imageFile != null) {
-            uploadImageProfileToStorage(user.imageFile)
-                .then((profileUrl) {
+            uploadImageProfileToStorage(user.imageFile).then((profileUrl) {
               createUserWithImage(user, profileUrl);
             });
           } else {
@@ -206,8 +205,7 @@ class UserFirebaseRemoteDataSourceImpl implements UserFirebaseRemoteDataSource {
   }
 
   @override
-  Future<String> uploadImageProfileToStorage(
-      File? file) async {
+  Future<String> uploadImageProfileToStorage(File? file) async {
     Reference ref = firebaseStorage
         .ref()
         .child("profileImages")

@@ -1,7 +1,7 @@
-
 import '../repository/user_firebase_repository.dart';
+
 class IsSignInUseCase {
-  final UserFirebaseRepository repository;
+  final UserRepository repository;
 
   IsSignInUseCase({required this.repository});
 

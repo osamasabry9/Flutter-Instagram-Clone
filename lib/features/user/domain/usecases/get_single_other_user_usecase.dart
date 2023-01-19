@@ -1,9 +1,8 @@
-
 import '../entities/user_entity.dart';
 import '../repository/user_firebase_repository.dart';
 
 class GetSingleOtherUserUseCase {
-  final UserFirebaseRepository repository;
+  final UserRepository repository;
 
   GetSingleOtherUserUseCase({required this.repository});
 

@@ -5,10 +5,10 @@ import 'dart:io';
 import '../../domain/repository/user_firebase_repository.dart';
 import '../data_sources/user_remote_data_source.dart';
 
-class UserFirebaseRepositoryImpl implements UserFirebaseRepository {
-  final UserFirebaseRemoteDataSource userRemoteDataSource;
+class UserRepositoryImpl implements UserRepository {
+  final UserRemoteDataSource userRemoteDataSource;
 
-  UserFirebaseRepositoryImpl({required this.userRemoteDataSource});
+  UserRepositoryImpl({required this.userRemoteDataSource});
 
   @override
   Future<void> createUser(UserEntity user) async =>
@@ -51,6 +51,8 @@ class UserFirebaseRepositoryImpl implements UserFirebaseRepository {
       userRemoteDataSource.followUnFollowUser(user);
 
   @override
-  Future<String> uploadImageProfileToStorage(File? file,) async =>
+  Future<String> uploadImageProfileToStorage(
+    File? file,
+  ) async =>
       userRemoteDataSource.uploadImageProfileToStorage(file);
 }

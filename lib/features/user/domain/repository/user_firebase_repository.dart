@@ -2,7 +2,7 @@ import 'dart:io';
 
 import '../entities/user_entity.dart';
 
-abstract class UserFirebaseRepository {
+abstract class UserRepository {
   // Credential Features
   Future<void> signInUser(UserEntity user);
   Future<void> signUpUser(UserEntity user);

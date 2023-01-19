@@ -2,7 +2,7 @@ import 'dart:io';
 
 import '../../domain/entities/user_entity.dart';
 
-abstract class UserFirebaseRemoteDataSource {
+abstract class UserRemoteDataSource {
   // Credential
   Future<void> signInUser(UserEntity user);
   Future<void> signUpUser(UserEntity user);

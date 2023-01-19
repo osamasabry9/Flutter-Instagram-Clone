@@ -2,7 +2,7 @@ import '../entities/user_entity.dart';
 import '../repository/user_firebase_repository.dart';
 
 class CreateUserUseCase {
-  final UserFirebaseRepository repository;
+  final UserRepository repository;
 
   CreateUserUseCase({required this.repository});
 
