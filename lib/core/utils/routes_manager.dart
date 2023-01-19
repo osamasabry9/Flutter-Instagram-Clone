@@ -10,6 +10,8 @@ import '../../features/Comment/presentation/Screens/comment_screen.dart';
 import '../../features/Comment/presentation/Screens/edit_comment_screen.dart';
 import '../../features/Post/presentation/screen/update_post_screen.dart';
 import '../../features/Post/presentation/screen/upload_post_screen.dart';
+import '../../features/replay/domain/entities/replay_entity.dart';
+import '../../features/replay/presentation/pages/edit_replay_screen.dart';
 import '../../features/user/presentation/auth/screens/login_screen.dart';
 import '../../features/user/presentation/auth/screens/register_screen.dart';
 import '../../features/user/presentation/profile/screen/edit_profile_screen.dart';
@@ -17,7 +19,6 @@ import '../../features/main_Screens/main_screen.dart';
 import 'strings_manager.dart';
 
 class Routes {
-  static const String splashRoute = '/';
   static const String loginRoute = '/login';
   static const String registerRoute = '/register';
   static const String forgotPasswordRoute = '/forgotPassword';
@@ -25,6 +26,7 @@ class Routes {
   static const String editProfileRoute = '/editProfile';
   static const String commentRoute = '/comment';
   static const String uploadCommentRoute = '/uploadComment';
+  static const String updateReplayRoute = '/updateReplay';
   static const String updatePostRoute = '/updatePost';
   static const String uploadPostRoute = '/uploadPost';
 }
@@ -34,10 +36,7 @@ class RouteGenerator {
     var args = settings.arguments;
 
     switch (settings.name) {
-      case Routes.splashRoute:
-        return MaterialPageRoute(
-          builder: (_) => const Scaffold(),
-        );
+
       case Routes.loginRoute:
         return MaterialPageRoute(
           builder: (context) {
@@ -55,8 +54,7 @@ class RouteGenerator {
           },
         );
       case Routes.registerRoute:
-        return MaterialPageRoute(
-          builder: (_) => const RegisterScreen(),
+        return routeBuilder( const RegisterScreen(),
         );
       case Routes.mainRoute:
         return MaterialPageRoute(
@@ -114,11 +112,20 @@ class RouteGenerator {
           }
           return routeBuilder(const NoFoundScreen());
         }
-        case Routes.uploadCommentRoute:
+      case Routes.uploadCommentRoute:
         {
           if (args is CommentEntity) {
             return routeBuilder(EditCommentScreen(
-              comment:args,
+              comment: args,
+            ));
+          }
+          return routeBuilder(const NoFoundScreen());
+        }
+      case Routes.updateReplayRoute:
+        {
+          if (args is ReplayEntity) {
+            return routeBuilder(EditReplayScreen(
+              replay: args,
             ));
           }
           return routeBuilder(const NoFoundScreen());

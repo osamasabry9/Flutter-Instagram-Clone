@@ -2,8 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get_it/get_it.dart';
-import 'package:instagram_clone/features/Post/domain/usecases/upload_image_post_usecase.dart';
-import 'package:instagram_clone/features/user/domain/usecases/upload_image_profile_to_storage_usecase.dart';
 
 import '../features/Comment/data/data_sources/comment_remote_data_source.dart';
 import '../features/Comment/data/data_sources/comment_remote_data_source_impl.dart';
@@ -25,8 +23,19 @@ import '../features/Post/domain/usecases/like_post_usecase.dart';
 import '../features/Post/domain/usecases/read_posts_usecase.dart';
 import '../features/Post/domain/usecases/read_single_post_usecase.dart';
 import '../features/Post/domain/usecases/update_post_usecase.dart';
+import '../features/Post/domain/usecases/upload_image_post_usecase.dart';
 import '../features/Post/presentation/cubit/get_single_post/get_single_post_cubit.dart';
 import '../features/Post/presentation/cubit/post_cubit.dart';
+import '../features/replay/data/datasources/replay_remote_data_source.dart';
+import '../features/replay/data/datasources/replay_remote_data_source_impl.dart';
+import '../features/replay/data/repositories/replay_repository_impl.dart';
+import '../features/replay/domain/repositories/replay_repository.dart';
+import '../features/replay/domain/usecases/create_replay_usecase.dart';
+import '../features/replay/domain/usecases/delete_replay_usecase.dart';
+import '../features/replay/domain/usecases/like_replay_usecase.dart';
+import '../features/replay/domain/usecases/read_replays_usecase.dart';
+import '../features/replay/domain/usecases/update_replay_usecase.dart';
+import '../features/replay/presentation/cubit/replay_cubit.dart';
 import '../features/user/data/data_sources/user_remote_data_source.dart';
 import '../features/user/data/data_sources/user_remote_data_source_impl.dart';
 import '../features/user/data/repository/user_firebase_repository_impl.dart';
@@ -42,6 +51,7 @@ import '../features/user/domain/usecases/sign_in_user_usecase.dart';
 import '../features/user/domain/usecases/sign_out_usecase.dart';
 import '../features/user/domain/usecases/sign_up_user_usecase.dart';
 import '../features/user/domain/usecases/update_user_usecase.dart';
+import '../features/user/domain/usecases/upload_image_profile_to_storage_usecase.dart';
 import '../features/user/presentation/auth/cubit/auth/auth_cubit.dart';
 import '../features/user/presentation/auth/cubit/credential/credential_cubit.dart';
 import '../features/user/presentation/profile/cubit/get_single_other_user/get_single_other_user_cubit.dart';
@@ -106,6 +116,17 @@ Future<void> init() async {
     ),
   );
 
+  // Replay Cubit Injection
+  instance.registerFactory(
+    () => ReplayCubit(
+      createReplayUseCase: instance.call(),
+      deleteReplayUseCase: instance.call(),
+      likeReplayUseCase: instance.call(),
+      readReplaysUseCase: instance.call(),
+      updateReplayUseCase: instance.call(),
+    ),
+  );
+
   // --------------------------Use Cases--------------------
 
   //++++++++++++++++++++++++++++++++++++  User ++++++++++++++++++++++++++++++++++++
@@ -163,37 +184,60 @@ Future<void> init() async {
   instance.registerLazySingleton(
       () => DeleteCommentUseCase(repository: instance.call()));
 
+  //++++++++++++++++++++++++++++++++++++  Replay ++++++++++++++++++++++++++++++++++++
+
+  instance.registerLazySingleton(
+      () => CreateReplayUseCase(repository: instance.call()));
+  instance.registerLazySingleton(
+      () => ReadReplaysUseCase(repository: instance.call()));
+  instance.registerLazySingleton(
+      () => LikeReplayUseCase(repository: instance.call()));
+  instance.registerLazySingleton(
+      () => UpdateReplayUseCase(repository: instance.call()));
+  instance.registerLazySingleton(
+      () => DeleteReplayUseCase(repository: instance.call()));
+
   // -----------------------------Repository-----------------------
 
-  instance.registerLazySingleton<UserFirebaseRepository>(
-    () => UserFirebaseRepositoryImpl(userRemoteDataSource: instance.call()),
+  instance.registerLazySingleton<UserRepository>(
+    () => UserRepositoryImpl(userRemoteDataSource: instance.call()),
   );
-  instance.registerLazySingleton<PostFirebaseRepository>(
-    () => PostFirebaseRepositoryImpl(postRemoteDataSource: instance.call()),
+  instance.registerLazySingleton<PostRepository>(
+    () => PostRepositoryImpl(postRemoteDataSource: instance.call()),
   );
-  instance.registerLazySingleton<CommentFirebaseRepository>(
-    () => CommentFirebaseRepositoryImpl(remoteDataSource: instance.call()),
+  instance.registerLazySingleton<CommentRepository>(
+    () => CommentRepositoryImpl(remoteDataSource: instance.call()),
+  );
+  instance.registerLazySingleton<ReplayRepository>(
+    () => ReplayRepositoryImpl(replayRemoteDataSource: instance.call()),
   );
 
   // -------------------------------- Remote Data Source
-  instance.registerLazySingleton<UserFirebaseRemoteDataSource>(
-      () => UserFirebaseRemoteDataSourceImpl(
+  instance.registerLazySingleton<UserRemoteDataSource>(
+      () => UserRemoteDataSourceImpl(
             firebaseFirestore: instance.call(),
             firebaseAuth: instance.call(),
             firebaseStorage: instance.call(),
           ));
-  instance.registerLazySingleton<PostFirebaseRemoteDataSource>(
-      () => PostFirebaseRemoteDataSourceImpl(
+  instance.registerLazySingleton<PostRemoteDataSource>(
+      () => PostRemoteDataSourceImpl(
             firebaseFirestore: instance.call(),
             firebaseAuth: instance.call(),
             firebaseStorage: instance.call(),
           ));
-  instance.registerLazySingleton<CommentFirebaseRemoteDataSource>(
-      () => CommentFirebaseRemoteDataSourceImpl(
+  instance.registerLazySingleton<CommentRemoteDataSource>(
+      () => CommentRemoteDataSourceImpl(
             firebaseFirestore: instance.call(),
             firebaseAuth: instance.call(),
             firebaseStorage: instance.call(),
           ));
+  instance.registerLazySingleton<ReplayRemoteDataSource>(
+      () => ReplayRemoteDataSourceImpl(
+            firebaseFirestore: instance.call(),
+            firebaseAuth: instance.call(),
+            firebaseStorage: instance.call(),
+          ));
+
   //--------------------------- Externals-----------------------------------
 
   final firebaseFirestore = FirebaseFirestore.instance;
