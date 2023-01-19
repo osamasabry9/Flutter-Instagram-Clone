@@ -2,7 +2,7 @@ import '../entities/comment_entity.dart';
 import '../repository/comment_firebase_repository.dart';
 
 class ReadCommentsUseCase {
-  final CommentFirebaseRepository repository;
+  final CommentRepository repository;
 
   ReadCommentsUseCase({required this.repository});
 

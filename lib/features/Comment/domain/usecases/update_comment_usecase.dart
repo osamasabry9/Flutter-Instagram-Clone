@@ -2,7 +2,7 @@ import '../entities/comment_entity.dart';
 import '../repository/comment_firebase_repository.dart';
 
 class UpdateCommentUseCase {
-  final CommentFirebaseRepository repository;
+  final CommentRepository repository;
 
   UpdateCommentUseCase({required this.repository});
 

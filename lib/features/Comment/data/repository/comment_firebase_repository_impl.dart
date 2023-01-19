@@ -3,10 +3,10 @@ import 'package:instagram_clone/features/Comment/domain/entities/comment_entity.
 
 import '../../domain/repository/comment_firebase_repository.dart';
 
-class CommentFirebaseRepositoryImpl implements CommentFirebaseRepository {
-  final CommentFirebaseRemoteDataSource remoteDataSource;
+class CommentRepositoryImpl implements CommentRepository {
+  final CommentRemoteDataSource remoteDataSource;
 
-  CommentFirebaseRepositoryImpl({required this.remoteDataSource});
+  CommentRepositoryImpl({required this.remoteDataSource});
 
   @override
   Future<void> createComment(CommentEntity comment) async =>

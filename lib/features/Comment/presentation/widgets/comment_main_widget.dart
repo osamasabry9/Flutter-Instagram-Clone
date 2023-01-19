@@ -7,6 +7,7 @@ import '../../../../app/app_entity.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../Post/domain/entities/post_entity.dart';
 import '../../../Post/presentation/cubit/get_single_post/get_single_post_cubit.dart';
+import '../../../replay/presentation/cubit/replay_cubit.dart';
 import '../../../user/domain/entities/user_entity.dart';
 import '../../../user/presentation/profile/cubit/get_single_user/get_single_user_cubit.dart';
 import '../../domain/entities/comment_entity.dart';
@@ -16,7 +17,7 @@ import 'single_comment_widget.dart';
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/constants_manager.dart';
 import '../../../../core/widgets/image_profile_widget.dart';
-
+import '../../../../../app/di.dart' as di;
 class CommentMainWidget extends StatefulWidget {
   final AppEntity appEntity;
   const CommentMainWidget({super.key, required this.appEntity});
@@ -70,28 +71,28 @@ class _CommentMainWidgetState extends State<CommentMainWidget> {
                           ),
                           AppConstants.sizeVer(AppSize.s12),
                           Expanded(
-                            child: ListView.builder(
-                                itemCount: commentState.comments.length,
-                                itemBuilder: (context, index) {
-                                  final singleComment =
-                                      commentState.comments[index];
-                                  return SingleCommentWidget(
-                                    currentUser: singleUser,
-                                    comment: singleComment,
-                                    onLongPressListener: () {
-                                      _openBottomModalSheet(
-                                        context: context,
-                                        comment: commentState.comments[index],
-                                      );
-                                    },
-                                    onLikeClickListener: () {
-                                      _likeComment(
-                                          comment:
-                                              commentState.comments[index]);
-                                    },
-                                  );
-                                }),
-                          ),
+                              child: ListView.builder(
+                                  itemCount: commentState.comments.length,
+                                  itemBuilder: (context, index) {
+                                    final singleComment = commentState.comments[index];
+                                    return BlocProvider(
+                                      create: (context) => di.instance<ReplayCubit>(),
+                                      child: SingleCommentWidget(
+                                        currentUser: singleUser,
+                                        comment: singleComment,
+                                        onLongPressListener: () {
+                                          _openBottomModalSheet(
+                                            context: context,
+                                            comment: commentState.comments[index],
+                                          );
+                                        },
+                                        onLikeClickListener: () {
+                                          _likeComment(comment: commentState.comments[index]);
+                                        },
+                                      ),
+                                    );
+                                  }),
+                            ),
                           _commentSection(currentUser: singleUser)
                         ],
                       );

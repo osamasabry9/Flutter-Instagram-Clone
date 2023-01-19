@@ -8,13 +8,12 @@ import 'package:instagram_clone/features/Comment/domain/entities/comment_entity.
 import '../../../../core/utils/constants_manager.dart';
 import '../models/comment_model.dart';
 
-class CommentFirebaseRemoteDataSourceImpl
-    implements CommentFirebaseRemoteDataSource {
+class CommentRemoteDataSourceImpl implements CommentRemoteDataSource {
   final FirebaseFirestore firebaseFirestore;
   final FirebaseAuth firebaseAuth;
   final FirebaseStorage firebaseStorage;
 
-  CommentFirebaseRemoteDataSourceImpl(
+  CommentRemoteDataSourceImpl(
       {required this.firebaseStorage,
       required this.firebaseFirestore,
       required this.firebaseAuth});

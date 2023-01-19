@@ -1,7 +1,6 @@
 import '../entities/comment_entity.dart';
 
-abstract class CommentFirebaseRepository {
-
+abstract class CommentRepository {
   // Comment Features
   Future<void> createComment(CommentEntity comment);
   Stream<List<CommentEntity>> readComments(String postId);

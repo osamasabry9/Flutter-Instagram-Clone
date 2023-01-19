@@ -41,6 +41,7 @@ class _EditCommentMainWidgetState extends State<EditCommentMainWidget> {
             InputEditProfileWidget(
               label: "description",
               textController: _descriptionController,
+              isProfile: false,
             ),
             AppConstants.sizeHor(AppSize.s10),
             MainButton(
