@@ -5,10 +5,10 @@ import 'dart:io';
 import '../../domain/repository/post_firebase_repository.dart';
 import '../data_sources/post_remote_data_source.dart';
 
-class PostFirebaseRepositoryImpl implements PostFirebaseRepository {
-  final PostFirebaseRemoteDataSource postRemoteDataSource;
+class PostRepositoryImpl implements PostRepository {
+  final PostRemoteDataSource postRemoteDataSource;
 
-  PostFirebaseRepositoryImpl({required this.postRemoteDataSource});
+  PostRepositoryImpl({required this.postRemoteDataSource});
 
   @override
   Future<void> createPost(PostEntity post) async =>

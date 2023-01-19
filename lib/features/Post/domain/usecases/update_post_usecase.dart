@@ -2,7 +2,7 @@ import '../entities/post_entity.dart';
 import '../repository/post_firebase_repository.dart';
 
 class UpdatePostUseCase {
-  final PostFirebaseRepository repository;
+  final PostRepository repository;
 
   UpdatePostUseCase({required this.repository});
 

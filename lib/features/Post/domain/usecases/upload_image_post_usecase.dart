@@ -2,9 +2,8 @@ import 'dart:io';
 
 import '../repository/post_firebase_repository.dart';
 
-
 class UploadImagePostUseCase {
-  final PostFirebaseRepository repository;
+  final PostRepository repository;
 
   UploadImagePostUseCase({required this.repository});
 

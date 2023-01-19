@@ -2,8 +2,8 @@ import 'dart:io';
 
 import '../entities/post_entity.dart';
 
-abstract class PostFirebaseRepository {
-    // Cloud Storage Feature
+abstract class PostRepository {
+  // Cloud Storage Feature
   Future<String> uploadPostImageToStorage(File? file);
 
   // Post Features

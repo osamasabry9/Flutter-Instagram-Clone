@@ -1,9 +1,8 @@
-
 import '../entities/post_entity.dart';
 import '../repository/post_firebase_repository.dart';
 
 class CreatePostUseCase {
-  final PostFirebaseRepository repository;
+  final PostRepository repository;
 
   CreatePostUseCase({required this.repository});
 

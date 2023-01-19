@@ -2,7 +2,7 @@ import '../entities/post_entity.dart';
 import '../repository/post_firebase_repository.dart';
 
 class LikePostUseCase {
-  final PostFirebaseRepository repository;
+  final PostRepository repository;
 
   LikePostUseCase({required this.repository});
 

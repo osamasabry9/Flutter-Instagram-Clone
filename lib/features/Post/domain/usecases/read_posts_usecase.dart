@@ -2,7 +2,7 @@ import '../entities/post_entity.dart';
 import '../repository/post_firebase_repository.dart';
 
 class ReadPostsUseCase {
-  final PostFirebaseRepository repository;
+  final PostRepository repository;
 
   ReadPostsUseCase({required this.repository});
 

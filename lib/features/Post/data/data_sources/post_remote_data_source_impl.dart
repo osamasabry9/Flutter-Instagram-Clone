@@ -10,12 +10,12 @@ import '../../../../core/utils/constants_manager.dart';
 import '../models/post_model.dart';
 import 'post_remote_data_source.dart';
 
-class PostFirebaseRemoteDataSourceImpl implements PostFirebaseRemoteDataSource {
+class PostRemoteDataSourceImpl implements PostRemoteDataSource {
   final FirebaseFirestore firebaseFirestore;
   final FirebaseAuth firebaseAuth;
   final FirebaseStorage firebaseStorage;
 
-  PostFirebaseRemoteDataSourceImpl(
+  PostRemoteDataSourceImpl(
       {required this.firebaseStorage,
       required this.firebaseFirestore,
       required this.firebaseAuth});

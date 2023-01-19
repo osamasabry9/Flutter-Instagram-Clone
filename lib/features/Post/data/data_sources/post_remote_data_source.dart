@@ -2,7 +2,7 @@ import 'dart:io';
 
 import '../../domain/entities/post_entity.dart';
 
-abstract class PostFirebaseRemoteDataSource {
+abstract class PostRemoteDataSource {
   Future<void> createPost(PostEntity post);
   Stream<List<PostEntity>> readPosts(PostEntity post);
   Stream<List<PostEntity>> readSinglePost(String postId);
