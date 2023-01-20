@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/features/Post/domain/entities/post_entity.dart';
+import 'package:instagram_clone/features/Post/presentation/screen/post_detail_screen.dart';
 import 'package:instagram_clone/features/user/domain/entities/user_entity.dart';
 import 'package:instagram_clone/features/user/presentation/auth/cubit/auth/auth_cubit.dart';
 
@@ -16,6 +17,7 @@ import '../../features/user/presentation/auth/screens/login_screen.dart';
 import '../../features/user/presentation/auth/screens/register_screen.dart';
 import '../../features/user/presentation/profile/screen/edit_profile_screen.dart';
 import '../../features/main_Screens/main_screen.dart';
+import '../../features/user/presentation/profile/screen/single_user_profile_screen.dart';
 import 'strings_manager.dart';
 
 class Routes {
@@ -24,11 +26,13 @@ class Routes {
   static const String forgotPasswordRoute = '/forgotPassword';
   static const String mainRoute = '/main';
   static const String editProfileRoute = '/editProfile';
+  static const String singleUserProfileRoute = '/singleUserProfileRoute';
   static const String commentRoute = '/comment';
   static const String uploadCommentRoute = '/uploadComment';
   static const String updateReplayRoute = '/updateReplay';
   static const String updatePostRoute = '/updatePost';
   static const String uploadPostRoute = '/uploadPost';
+  static const String postDetailRoute = '/postDetail';
 }
 
 class RouteGenerator {
@@ -82,6 +86,16 @@ class RouteGenerator {
             return routeBuilder(const NoFoundScreen());
           }
         }
+              case Routes.singleUserProfileRoute:
+        {
+          if (args is String) {
+            return routeBuilder(SingleUserProfileScreen(
+              otherUserId: args,
+            ));
+          } else {
+            return routeBuilder(const NoFoundScreen());
+          }
+        }
       case Routes.uploadPostRoute:
         {
           if (args is UserEntity) {
@@ -98,6 +112,16 @@ class RouteGenerator {
           if (args is PostEntity) {
             return routeBuilder(UpdatePostScreen(
               post: args,
+            ));
+          } else {
+            return routeBuilder(const NoFoundScreen());
+          }
+        }
+        case Routes.postDetailRoute:
+        {
+          if (args is String) {
+            return routeBuilder(PostDetailScreen(
+              postId: args,
             ));
           } else {
             return routeBuilder(const NoFoundScreen());
