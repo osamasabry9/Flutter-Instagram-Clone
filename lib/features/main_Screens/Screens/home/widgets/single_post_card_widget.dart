@@ -7,6 +7,7 @@ import '../../../../../core/utils/color_manager.dart';
 import '../../../../../core/utils/constants_manager.dart';
 import '../../../../../core/utils/routes_manager.dart';
 import '../../../../../core/utils/values_manager.dart';
+import '../../../../../core/widgets/bottom_modal_sheet_widget.dart';
 import '../../../../../core/widgets/image_profile_widget.dart';
 import '../../../../../core/widgets/like_animation_widget.dart';
 import '../../../../Post/domain/entities/post_entity.dart';
@@ -49,7 +50,13 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    Routes.singleUserProfileRoute,
+                    arguments: widget.post.creatorUid,
+                  );
+                },
                 child: Row(
                   children: [
                     SizedBox(
@@ -74,7 +81,17 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
               widget.post.creatorUid == _currentUid
                   ? GestureDetector(
                       onTap: () {
-                        _openBottomModalSheet(context, widget.post);
+                        openBottomModalSheetWidget(
+                          context,
+                          title1: "Delete Post",
+                          onTap1: _deletePost,
+                          title2: "Update Post",
+                          onTap2: () {
+                            Navigator.pushNamed(context, Routes.updatePostRoute,
+                                    arguments: widget.post)
+                                .then((value) => Navigator.pop(context));
+                          },
+                        );
                       },
                       child: const Icon(
                         Icons.more_vert,
@@ -217,90 +234,10 @@ class _SinglePostCardWidgetState extends State<SinglePostCardWidget> {
     );
   }
 
-  _openBottomModalSheet(
-    BuildContext context,
-    final PostEntity post,
-  ) {
-    return showModalBottomSheet(
-        context: context,
-        builder: (context) {
-          return Container(
-            height: 150,
-            decoration:
-                BoxDecoration(color: ColorManager.darkGrey.withOpacity(.8)),
-            child: SingleChildScrollView(
-              child: Container(
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.only(left: 10.0),
-                      child: Text(
-                        "More Options",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                            color: ColorManager.white),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    const Divider(
-                      thickness: 1,
-                      color: ColorManager.black,
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10.0),
-                      child: GestureDetector(
-                        onTap: _deletePost,
-                        child: const Text(
-                          "Delete Post",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
-                              color: ColorManager.white),
-                        ),
-                      ),
-                    ),
-                    AppConstants.sizeVer(AppSize.s8),
-                    const Divider(
-                      thickness: 1,
-                      color: ColorManager.black,
-                    ),
-                    AppConstants.sizeVer(AppSize.s8),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, Routes.updatePostRoute,
-                              arguments: post);
-                        },
-                        child: const Text(
-                          "Update Post",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
-                              color: ColorManager.white),
-                        ),
-                      ),
-                    ),
-                    AppConstants.sizeVer(AppSize.s8),
-                  ],
-                ),
-              ),
-            ),
-          );
-        });
-  }
-
   _deletePost() {
     BlocProvider.of<PostCubit>(context)
-        .deletePost(post: PostEntity(postId: widget.post.postId));
+        .deletePost(post: PostEntity(postId: widget.post.postId))
+        .then((value) => Navigator.pop(context));
   }
 
   _likePost() {
