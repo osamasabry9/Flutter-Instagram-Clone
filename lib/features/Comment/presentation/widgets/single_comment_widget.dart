@@ -224,13 +224,14 @@ class _SingleCommentWidgetState extends State<SingleCommentWidget> {
       ),
     );
   }
+
   _createReplay() {
     BlocProvider.of<ReplayCubit>(context)
         .createReplay(
             replay: ReplayEntity(
-      replayId:const Uuid().v1(),
+      replayId: const Uuid().v1(),
       createAt: Timestamp.now(),
-      likes:const [],
+      likes: const [],
       username: widget.currentUser!.username,
       userProfileUrl: widget.currentUser!.profileUrl,
       creatorUid: widget.currentUser!.uid,
@@ -246,8 +247,9 @@ class _SingleCommentWidgetState extends State<SingleCommentWidget> {
     });
   }
 
-  _openBottomModalSheet({required BuildContext context, required ReplayEntity replay}) {
-        return showModalBottomSheet(
+  _openBottomModalSheet(
+      {required BuildContext context, required ReplayEntity replay}) {
+    return showModalBottomSheet(
         context: context,
         builder: (context) {
           return Container(
@@ -305,9 +307,9 @@ class _SingleCommentWidgetState extends State<SingleCommentWidget> {
                       padding: const EdgeInsets.only(left: 10.0),
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(
-                              context, Routes.updateReplayRoute,
-                              arguments: replay);
+                          Navigator.pushNamed(context, Routes.updateReplayRoute,
+                                  arguments: replay)
+                              .then((value) => Navigator.pop(context));
                         },
                         child: const Text(
                           "Update Replay",
@@ -328,19 +330,20 @@ class _SingleCommentWidgetState extends State<SingleCommentWidget> {
   }
 
   _deleteReplay({required ReplayEntity replay}) {
-    BlocProvider.of<ReplayCubit>(context).deleteReplay(replay: ReplayEntity(
-      postId: replay.postId,
-      commentId: replay.commentId,
-      replayId: replay.replayId
-    ));
+    BlocProvider.of<ReplayCubit>(context)
+        .deleteReplay(
+            replay: ReplayEntity(
+                postId: replay.postId,
+                commentId: replay.commentId,
+                replayId: replay.replayId))
+        .then((value) => Navigator.pop(context));
   }
 
   _likeReplay({required ReplayEntity replay}) {
-    BlocProvider.of<ReplayCubit>(context).likeReplay(replay: ReplayEntity(
-        postId: replay.postId,
-        commentId: replay.commentId,
-        replayId: replay.replayId
-    ));
+    BlocProvider.of<ReplayCubit>(context).likeReplay(
+        replay: ReplayEntity(
+            postId: replay.postId,
+            commentId: replay.commentId,
+            replayId: replay.replayId));
   }
-
 }

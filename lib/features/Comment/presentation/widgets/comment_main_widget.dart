@@ -18,6 +18,7 @@ import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/constants_manager.dart';
 import '../../../../core/widgets/image_profile_widget.dart';
 import '../../../../../app/di.dart' as di;
+
 class CommentMainWidget extends StatefulWidget {
   final AppEntity appEntity;
   const CommentMainWidget({super.key, required this.appEntity});
@@ -71,28 +72,32 @@ class _CommentMainWidgetState extends State<CommentMainWidget> {
                           ),
                           AppConstants.sizeVer(AppSize.s12),
                           Expanded(
-                              child: ListView.builder(
-                                  itemCount: commentState.comments.length,
-                                  itemBuilder: (context, index) {
-                                    final singleComment = commentState.comments[index];
-                                    return BlocProvider(
-                                      create: (context) => di.instance<ReplayCubit>(),
-                                      child: SingleCommentWidget(
-                                        currentUser: singleUser,
-                                        comment: singleComment,
-                                        onLongPressListener: () {
-                                          _openBottomModalSheet(
-                                            context: context,
-                                            comment: commentState.comments[index],
-                                          );
-                                        },
-                                        onLikeClickListener: () {
-                                          _likeComment(comment: commentState.comments[index]);
-                                        },
-                                      ),
-                                    );
-                                  }),
-                            ),
+                            child: ListView.builder(
+                                itemCount: commentState.comments.length,
+                                itemBuilder: (context, index) {
+                                  final singleComment =
+                                      commentState.comments[index];
+                                  return BlocProvider(
+                                    create: (context) =>
+                                        di.instance<ReplayCubit>(),
+                                    child: SingleCommentWidget(
+                                      currentUser: singleUser,
+                                      comment: singleComment,
+                                      onLongPressListener: () {
+                                        _openBottomModalSheet(
+                                          context: context,
+                                          comment: commentState.comments[index],
+                                        );
+                                      },
+                                      onLikeClickListener: () {
+                                        _likeComment(
+                                            comment:
+                                                commentState.comments[index]);
+                                      },
+                                    ),
+                                  );
+                                }),
+                          ),
                           _commentSection(currentUser: singleUser)
                         ],
                       );
@@ -286,8 +291,9 @@ class _CommentMainWidgetState extends State<CommentMainWidget> {
                       child: GestureDetector(
                         onTap: () {
                           Navigator.pushNamed(
-                              context, Routes.uploadCommentRoute,
-                              arguments: comment);
+                                  context, Routes.uploadCommentRoute,
+                                  arguments: comment)
+                              .then((value) => Navigator.pop(context));
                         },
                         child: const Text(
                           "Update Comment",
@@ -308,8 +314,10 @@ class _CommentMainWidgetState extends State<CommentMainWidget> {
   }
 
   _deleteComment({required String commentId, required String postId}) {
-    BlocProvider.of<CommentCubit>(context).deleteComment(
-        comment: CommentEntity(commentId: commentId, postId: postId));
+    BlocProvider.of<CommentCubit>(context)
+        .deleteComment(
+            comment: CommentEntity(commentId: commentId, postId: postId))
+        .then((value) => Navigator.pop(context));
   }
 
   _likeComment({required CommentEntity comment}) {
