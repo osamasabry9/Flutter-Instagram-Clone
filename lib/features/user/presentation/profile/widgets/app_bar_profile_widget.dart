@@ -8,9 +8,9 @@ import '../../../../../../core/utils/constants_manager.dart';
 import '../../auth/cubit/auth/auth_cubit.dart';
 import '../screen/edit_profile_screen.dart';
 
-AppBar appBarProfileWidget(BuildContext context, UserEntity currentUser) {
+AppBar appBarProfileWidget(BuildContext context, UserEntity currentUser ,{bool isYourProfile = false}) {
   return AppBar(
-    automaticallyImplyLeading: false,
+    automaticallyImplyLeading: isYourProfile,
     title: Text(currentUser.username.toString()),
     actions: [
       Padding(
@@ -66,11 +66,11 @@ _openBottomModalSheet(BuildContext context, UserEntity currentUser) {
                     padding: const EdgeInsets.only(left: 10.0),
                     child: GestureDetector(
                       onTap: () {
-                        // debugPrint("Edit Profile");
                         Navigator.push(
-                            context,
-                            routeBuilder(
-                                EditProfileScreen(currentUser: currentUser)));
+                                context,
+                                routeBuilder(EditProfileScreen(
+                                    currentUser: currentUser)))
+                            .then((value) => Navigator.pop(context));
                       },
                       child: const Text(
                         "Edit Profile",
