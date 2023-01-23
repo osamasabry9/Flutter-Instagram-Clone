@@ -72,7 +72,7 @@ class InfoUserWidget extends StatelessWidget {
                 const SizedBox(width: AppSize.s16),
                 GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, Routes.followersRoute,
+                    Navigator.pushNamed(context, Routes.followingRoute,
                         arguments: currentUser);
                   },
                   child: Column(
