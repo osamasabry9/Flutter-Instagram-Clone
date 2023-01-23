@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram_clone/core/utils/routes_manager.dart';
 import 'package:instagram_clone/core/widgets/main_button.dart';
 
 import '../../../../../../core/utils/color_manager.dart';
@@ -49,32 +50,44 @@ class InfoUserWidget extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(width: AppSize.s16),
-                Column(
-                  children: [
-                    Text(
-                      "${currentUser.totalFollowers}",
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    const SizedBox(height: AppSize.s8),
-                    Text(
-                      "Followers",
-                      style: Theme.of(context).textTheme.titleMedium,
-                    )
-                  ],
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, Routes.followersRoute,
+                        arguments: currentUser);
+                  },
+                  child: Column(
+                    children: [
+                      Text(
+                        "${currentUser.totalFollowers}",
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      const SizedBox(height: AppSize.s8),
+                      Text(
+                        "Followers",
+                        style: Theme.of(context).textTheme.titleMedium,
+                      )
+                    ],
+                  ),
                 ),
                 const SizedBox(width: AppSize.s16),
-                Column(
-                  children: [
-                    Text(
-                      "${currentUser.totalFollowing}",
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    const SizedBox(height: AppSize.s8),
-                    Text(
-                      "Following",
-                      style: Theme.of(context).textTheme.titleMedium,
-                    )
-                  ],
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, Routes.followersRoute,
+                        arguments: currentUser);
+                  },
+                  child: Column(
+                    children: [
+                      Text(
+                        "${currentUser.totalFollowing}",
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      const SizedBox(height: AppSize.s8),
+                      Text(
+                        "Following",
+                        style: Theme.of(context).textTheme.titleMedium,
+                      )
+                    ],
+                  ),
                 ),
                 const SizedBox(width: AppSize.s12),
               ],

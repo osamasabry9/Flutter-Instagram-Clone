@@ -4,6 +4,7 @@ import 'package:instagram_clone/features/Post/domain/entities/post_entity.dart';
 import 'package:instagram_clone/features/Post/presentation/screen/post_detail_screen.dart';
 import 'package:instagram_clone/features/user/domain/entities/user_entity.dart';
 import 'package:instagram_clone/features/user/presentation/auth/cubit/auth/auth_cubit.dart';
+import 'package:instagram_clone/features/user/presentation/profile/screen/followers_screen.dart';
 
 import '../../app/app_entity.dart';
 import '../../features/Comment/domain/entities/comment_entity.dart';
@@ -17,6 +18,7 @@ import '../../features/user/presentation/auth/screens/login_screen.dart';
 import '../../features/user/presentation/auth/screens/register_screen.dart';
 import '../../features/user/presentation/profile/screen/edit_profile_screen.dart';
 import '../../features/main_Screens/main_screen.dart';
+import '../../features/user/presentation/profile/screen/following_screen.dart';
 import '../../features/user/presentation/profile/screen/single_user_profile_screen.dart';
 import 'strings_manager.dart';
 
@@ -27,6 +29,8 @@ class Routes {
   static const String mainRoute = '/main';
   static const String editProfileRoute = '/editProfile';
   static const String singleUserProfileRoute = '/singleUserProfileRoute';
+  static const String followersRoute = '/followers';
+  static const String followingRoute = '/followingRoute';
   static const String commentRoute = '/comment';
   static const String uploadCommentRoute = '/uploadComment';
   static const String updateReplayRoute = '/updateReplay';
@@ -40,7 +44,6 @@ class RouteGenerator {
     var args = settings.arguments;
 
     switch (settings.name) {
-
       case Routes.loginRoute:
         return MaterialPageRoute(
           builder: (context) {
@@ -58,7 +61,8 @@ class RouteGenerator {
           },
         );
       case Routes.registerRoute:
-        return routeBuilder( const RegisterScreen(),
+        return routeBuilder(
+          const RegisterScreen(),
         );
       case Routes.mainRoute:
         return MaterialPageRoute(
@@ -86,11 +90,31 @@ class RouteGenerator {
             return routeBuilder(const NoFoundScreen());
           }
         }
-              case Routes.singleUserProfileRoute:
+      case Routes.singleUserProfileRoute:
         {
           if (args is String) {
             return routeBuilder(SingleUserProfileScreen(
               otherUserId: args,
+            ));
+          } else {
+            return routeBuilder(const NoFoundScreen());
+          }
+        }
+      case Routes.followersRoute:
+        {
+          if (args is UserEntity) {
+            return routeBuilder(FollowersScreen(
+              user: args,
+            ));
+          } else {
+            return routeBuilder(const NoFoundScreen());
+          }
+        }
+      case Routes.followingRoute:
+        {
+          if (args is UserEntity) {
+            return routeBuilder(FollowingScreen(
+              user: args,
             ));
           } else {
             return routeBuilder(const NoFoundScreen());
@@ -117,7 +141,7 @@ class RouteGenerator {
             return routeBuilder(const NoFoundScreen());
           }
         }
-        case Routes.postDetailRoute:
+      case Routes.postDetailRoute:
         {
           if (args is String) {
             return routeBuilder(PostDetailScreen(
