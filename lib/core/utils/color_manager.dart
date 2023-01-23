@@ -9,6 +9,7 @@ class ColorManager {
 
   static const Color darkPrimary = Color.fromRGBO(150, 75, 255, 1);
   static const Color lightPrimary = Color.fromRGBO(145, 71, 255, 1);
+  static const Color backgroundContainer = Color(0xffE6EEFA);
   static const Color grey1 = Color(0xff707070);
   static const Color grey2 = Color(0xff797979);
   static const Color white = Color(0xffFFFFFF);
