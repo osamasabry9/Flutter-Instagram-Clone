@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
           padding: const EdgeInsets.all(AppPadding.p10),
           child: Column(
             children: [
-              appBarRowWidget(),
+              appBarRowWidget(context),
               Expanded(
                 child: BlocProvider<PostCubit>(
                   create: (context) =>
