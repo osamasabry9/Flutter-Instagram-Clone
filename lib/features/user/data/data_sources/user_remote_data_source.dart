@@ -20,4 +20,8 @@ abstract class UserRemoteDataSource {
 
   // Cloud Storage
   Future<String> uploadImageProfileToStorage(File? file);
+
+  // Get my chat
+
+  // Stream<List<UserEntity>> getMyChat(String uid);
 }

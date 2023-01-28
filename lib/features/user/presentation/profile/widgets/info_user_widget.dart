@@ -6,6 +6,7 @@ import 'package:instagram_clone/core/widgets/main_button.dart';
 import '../../../../../../core/utils/color_manager.dart';
 import '../../../../../../core/utils/values_manager.dart';
 import '../../../../../core/widgets/image_profile_widget.dart';
+import '../../../../chat/presentation/pages/chat_details_screen.dart';
 import '../../../domain/entities/user_entity.dart';
 import '../cubit/user_cubit.dart';
 
@@ -94,20 +95,50 @@ class InfoUserWidget extends StatelessWidget {
             ),
             currentUid == currentUser.uid
                 ? Container()
-                : MainButton(
-                    width: MediaQuery.of(context).size.width * 0.3,
-                    height: MediaQuery.of(context).size.height * 0.05,
-                    title: currentUser.followers!.contains(currentUid)
-                        ? "UnFollow"
-                        : "Follow",
-                    color: currentUser.followers!.contains(currentUid)
-                        ? ColorManager.white.withOpacity(.4)
-                        : ColorManager.primary,
-                    onTap: () {
-                      BlocProvider.of<UserCubit>(context).followUnFollowUser(
-                          user: UserEntity(
-                              uid: currentUid, otherUid: currentUser.uid));
-                    },
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      MainButton(
+                        width: MediaQuery.of(context).size.width * 0.25,
+                        height: MediaQuery.of(context).size.height * 0.05,
+                        title: currentUser.followers!.contains(currentUid)
+                            ? "UnFollow"
+                            : "Follow",
+                        color: currentUser.followers!.contains(currentUid)
+                            ? ColorManager.white.withOpacity(.4)
+                            : ColorManager.grey,
+                        onTap: () {
+                          BlocProvider.of<UserCubit>(context)
+                              .followUnFollowUser(
+                                  user: UserEntity(
+                                      uid: currentUid,
+                                      otherUid: currentUser.uid));
+                        },
+                      ),
+                      const SizedBox(width: AppSize.s8),
+                      MainButton(
+                        width: MediaQuery.of(context).size.width * 0.25,
+                        height: MediaQuery.of(context).size.height * 0.05,
+                        title: "Message",
+                        color: ColorManager.grey,
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ChatDetailsScreen(
+                                senderId: currentUid,
+                                receiverUser: currentUser,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+
+                      /*
+                      onTap: () {
+        
+                      */
+                    ],
                   ),
           ],
         ),

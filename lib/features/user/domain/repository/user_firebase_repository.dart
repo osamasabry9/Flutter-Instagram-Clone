@@ -20,4 +20,8 @@ abstract class UserRepository {
 
   // Cloud Storage Feature
   Future<String> uploadImageProfileToStorage(File? file);
+
+  // Get My Chat
+
+  // Stream<List<UserEntity>> getMyChat(String uid);
 }

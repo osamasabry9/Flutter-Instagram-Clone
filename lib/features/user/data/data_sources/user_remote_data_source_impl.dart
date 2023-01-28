@@ -299,4 +299,25 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       }
     }
   }
+
+  // @override
+  // Stream<List<UserEntity>> getMyChat(String uid) {
+  //   debugPrint("getMyChat Start *********");
+  //   final userCollection = firebaseFirestore.collection(FirebaseConst.users);
+
+  //   final doc =  userCollection
+  //       .doc(uid)
+  //       .collection(FirebaseConst.chats)
+  //       .snapshots()
+  //       .map((querySnapshot) => querySnapshot.docs.map((e){
+  //         userCollection.where("uid", isEqualTo: uid).limit(1).snapshots().map((querySnapshot) =>
+  //       querySnapshot.docs.map((e) => UserModel.fromSnapshot(e)).toList());
+  //       }));
+        
+
+
+
+  // }
+
+
 }

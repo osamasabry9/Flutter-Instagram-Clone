@@ -55,4 +55,8 @@ class UserRepositoryImpl implements UserRepository {
     File? file,
   ) async =>
       userRemoteDataSource.uploadImageProfileToStorage(file);
+
+  // @override
+  // Stream<List<UserEntity>> getMyChat(String uid) =>
+  //     userRemoteDataSource.getMyChat(uid);
 }
