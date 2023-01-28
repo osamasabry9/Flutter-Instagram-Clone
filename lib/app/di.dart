@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:instagram_clone/features/chat/presentation/cubit/chat_cubit.dart';
 
 import '../features/Comment/data/data_sources/comment_remote_data_source.dart';
 import '../features/Comment/data/data_sources/comment_remote_data_source_impl.dart';
@@ -26,6 +27,12 @@ import '../features/Post/domain/usecases/update_post_usecase.dart';
 import '../features/Post/domain/usecases/upload_image_post_usecase.dart';
 import '../features/Post/presentation/cubit/get_single_post/get_single_post_cubit.dart';
 import '../features/Post/presentation/cubit/post_cubit.dart';
+import '../features/chat/data/datasources/message_remote_data_source.dart';
+import '../features/chat/data/datasources/message_remote_data_source_impl.dart';
+import '../features/chat/data/repositories/message_firebase_repository_impl.dart';
+import '../features/chat/domain/repositories/message_firebase_repository.dart';
+import '../features/chat/domain/usecases/get_message_usecase.dart';
+import '../features/chat/domain/usecases/send_message_usecase.dart';
 import '../features/replay/data/datasources/replay_remote_data_source.dart';
 import '../features/replay/data/datasources/replay_remote_data_source_impl.dart';
 import '../features/replay/data/repositories/replay_repository_impl.dart';
@@ -92,6 +99,7 @@ Future<void> init() async {
   instance.registerFactory(() =>
       GetSingleOtherUserCubit(getSingleOtherUserUseCase: instance.call()));
 
+  
   // Post Cubit Injection
   instance.registerFactory(
     () => PostCubit(
@@ -124,6 +132,13 @@ Future<void> init() async {
       likeReplayUseCase: instance.call(),
       readReplaysUseCase: instance.call(),
       updateReplayUseCase: instance.call(),
+    ),
+  );
+  // Chat Cubit Injection
+  instance.registerFactory(
+    () => ChatCubit(
+      getMessageUseCase: instance.call(),
+      sendMessageUseCase: instance.call(),
     ),
   );
 
@@ -197,6 +212,13 @@ Future<void> init() async {
   instance.registerLazySingleton(
       () => DeleteReplayUseCase(repository: instance.call()));
 
+  //++++++++++++++++++++++++++++++++++++  Chat ++++++++++++++++++++++++++++++++++++
+
+  instance.registerLazySingleton(
+      () => GetMessageUseCase(repository: instance.call()));
+  instance.registerLazySingleton(
+      () => SendMessageUseCase(repository: instance.call()));
+
   // -----------------------------Repository-----------------------
 
   instance.registerLazySingleton<UserRepository>(
@@ -210,6 +232,9 @@ Future<void> init() async {
   );
   instance.registerLazySingleton<ReplayRepository>(
     () => ReplayRepositoryImpl(replayRemoteDataSource: instance.call()),
+  );
+  instance.registerLazySingleton<MessageRepository>(
+    () => MessageRepositoryImpl(messageRemoteDataSource: instance.call()),
   );
 
   // -------------------------------- Remote Data Source
@@ -237,7 +262,12 @@ Future<void> init() async {
             firebaseAuth: instance.call(),
             firebaseStorage: instance.call(),
           ));
-
+  instance.registerLazySingleton<MessageRemoteDataSource>(
+      () => MessageRemoteDataSourceImpl(
+            firebaseFirestore: instance.call(),
+            firebaseAuth: instance.call(),
+            firebaseStorage: instance.call(),
+          ));
   //--------------------------- Externals-----------------------------------
 
   final firebaseFirestore = FirebaseFirestore.instance;

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/features/Post/domain/entities/post_entity.dart';
 import 'package:instagram_clone/features/Post/presentation/screen/post_detail_screen.dart';
+import 'package:instagram_clone/features/chat/presentation/pages/chat_screen.dart';
 import 'package:instagram_clone/features/user/domain/entities/user_entity.dart';
 import 'package:instagram_clone/features/user/presentation/auth/cubit/auth/auth_cubit.dart';
 import 'package:instagram_clone/features/user/presentation/profile/screen/followers_screen.dart';
@@ -37,6 +38,7 @@ class Routes {
   static const String updatePostRoute = '/updatePost';
   static const String uploadPostRoute = '/uploadPost';
   static const String postDetailRoute = '/postDetail';
+  static const String chatRoute = '/chat';
 }
 
 class RouteGenerator {
@@ -177,6 +179,10 @@ class RouteGenerator {
             ));
           }
           return routeBuilder(const NoFoundScreen());
+        }
+         case Routes.chatRoute:
+        {
+          return routeBuilder(const ChatScreen());
         }
 
       default:

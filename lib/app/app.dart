@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram_clone/features/chat/presentation/cubit/chat_cubit.dart';
 
 import '../core/utils/routes_manager.dart';
 import '../core/utils/theme_manager.dart';
@@ -24,11 +25,15 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => di.instance<AuthCubit>()..appStarted(context)),
+        BlocProvider(
+            create: (_) => di.instance<AuthCubit>()..appStarted(context)),
         BlocProvider(create: (_) => di.instance<CredentialCubit>()),
         BlocProvider(create: (_) => di.instance<UserCubit>()),
         BlocProvider(create: (_) => di.instance<GetSingleUserCubit>()),
         BlocProvider(create: (_) => di.instance<GetSingleOtherUserCubit>()),
+        BlocProvider(
+          create: (_) => di.instance<ChatCubit>(),
+        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

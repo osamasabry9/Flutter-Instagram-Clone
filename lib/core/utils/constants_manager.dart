@@ -32,4 +32,6 @@ class FirebaseConst {
   static const String posts = "posts";
   static const String comment = "comment";
   static const String replay = "replay";
+  static const String chats = "chats";
+  static const String messages = "messages";
 }
