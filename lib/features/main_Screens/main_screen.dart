@@ -79,7 +79,7 @@ class _MainScreenState extends State<MainScreen> {
               controller: pageController,
               onPageChanged: onPageChanged,
               children:  [
-                const HomeScreen(),
+                 HomeScreen(currentUser: currentUser),
                 const SearchScreen(),
                  UploadPostScreen(currentUser: currentUser),
                 const ActivityScreen(),
