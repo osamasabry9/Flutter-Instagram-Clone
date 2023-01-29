@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram_clone/core/utils/color_manager.dart';
 import 'package:instagram_clone/features/user/domain/entities/user_entity.dart';
 
 import '../../../../../../core/utils/values_manager.dart';
@@ -60,14 +61,19 @@ class _ProfileMainWidgetState extends State<ProfileMainWidget> {
                   currentUid: widget.currentUser.uid!),
               const SizedBox(height: AppSize.s12),
               Text(
-                "//${widget.currentUser.name}",
+                "${widget.currentUser.name}",
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               const SizedBox(height: AppSize.s12),
               Text(
                 "${widget.currentUser.bio}",
               ),
-              const SizedBox(height: AppSize.s20),
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: AppPadding.p10),
+                child: Divider(
+                  color: ColorManager.grey,
+                ),
+              ),
               ViewPostsWidget(userId: widget.currentUser.uid!),
             ],
           ),

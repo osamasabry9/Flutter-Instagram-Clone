@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/utils/values_manager.dart';
+import '../../../../../core/utils/color_manager.dart';
 import '../../../../Post/domain/entities/post_entity.dart';
 import '../../../../Post/presentation/cubit/post_cubit.dart';
 import '../../../domain/usecases/get_current_uid_usecase.dart';
@@ -56,7 +57,8 @@ class _SingleUserProfileMainWidgetState
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    InfoUserWidget(currentUser: singleUser ,currentUid : currentUid),
+                    InfoUserWidget(
+                        currentUser: singleUser, currentUid: currentUid),
                     const SizedBox(height: AppSize.s12),
                     Text(
                       "${singleUser.name}",
@@ -66,7 +68,12 @@ class _SingleUserProfileMainWidgetState
                     Text(
                       "${singleUser.bio}",
                     ),
-                    const SizedBox(height: AppSize.s20),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: AppPadding.p10),
+                      child: Divider(
+                        color: ColorManager.grey,
+                      ),
+                    ),
                     ViewPostsWidget(userId: singleUser.uid!),
                   ],
                 ),
