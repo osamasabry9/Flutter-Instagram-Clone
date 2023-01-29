@@ -4,7 +4,6 @@ import 'package:instagram_clone/features/chat/presentation/pages/chat_details_sc
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/image_profile_widget.dart';
 import '../../../user/domain/entities/user_entity.dart';
-import 'chat_details_widget.dart';
 
 class BuildChatItem extends StatelessWidget {
   const BuildChatItem({
