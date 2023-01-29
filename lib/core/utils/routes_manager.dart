@@ -15,6 +15,7 @@ import '../../features/Post/presentation/screen/update_post_screen.dart';
 import '../../features/Post/presentation/screen/upload_post_screen.dart';
 import '../../features/replay/domain/entities/replay_entity.dart';
 import '../../features/replay/presentation/pages/edit_replay_screen.dart';
+import '../../features/stroy/presentation/pages/story_screen.dart';
 import '../../features/user/presentation/auth/screens/login_screen.dart';
 import '../../features/user/presentation/auth/screens/register_screen.dart';
 import '../../features/user/presentation/profile/screen/edit_profile_screen.dart';
@@ -39,6 +40,7 @@ class Routes {
   static const String uploadPostRoute = '/uploadPost';
   static const String postDetailRoute = '/postDetail';
   static const String chatRoute = '/chat';
+  static const String storyRoute = '/story';
 }
 
 class RouteGenerator {
@@ -183,6 +185,10 @@ class RouteGenerator {
          case Routes.chatRoute:
         {
           return routeBuilder(const ChatScreen());
+        }
+           case Routes.storyRoute:
+        {
+          return routeBuilder(const StoryScreen());
         }
 
       default:
