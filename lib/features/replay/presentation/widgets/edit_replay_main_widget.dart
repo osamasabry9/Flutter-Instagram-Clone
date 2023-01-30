@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instagram_clone/core/utils/constants_manager.dart';
+import '../../../../core/utils/constants_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/main_button.dart';
 import '../../../user/presentation/profile/widgets/input_edit_profile_widget.dart';
