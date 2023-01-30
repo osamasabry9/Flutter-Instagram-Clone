@@ -1,5 +1,5 @@
-import 'package:instagram_clone/features/Comment/data/data_sources/comment_remote_data_source.dart';
-import 'package:instagram_clone/features/Comment/domain/entities/comment_entity.dart';
+import '../data_sources/comment_remote_data_source.dart';
+import '../../domain/entities/comment_entity.dart';
 
 import '../../domain/repository/comment_firebase_repository.dart';
 

@@ -1,10 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instagram_clone/core/utils/routes_manager.dart';
 import 'package:uuid/uuid.dart';
+
+import '../../../../../app/di.dart' as di;
 import '../../../../app/app_entity.dart';
+import '../../../../core/utils/color_manager.dart';
+import '../../../../core/utils/constants_manager.dart';
+import '../../../../core/utils/routes_manager.dart';
 import '../../../../core/utils/values_manager.dart';
+import '../../../../core/widgets/image_profile_widget.dart';
 import '../../../Post/domain/entities/post_entity.dart';
 import '../../../Post/presentation/cubit/get_single_post/get_single_post_cubit.dart';
 import '../../../replay/presentation/cubit/replay_cubit.dart';
@@ -13,11 +18,6 @@ import '../../../user/presentation/profile/cubit/get_single_user/get_single_user
 import '../../domain/entities/comment_entity.dart';
 import '../cubit/comment_cubit.dart';
 import 'single_comment_widget.dart';
-
-import '../../../../core/utils/color_manager.dart';
-import '../../../../core/utils/constants_manager.dart';
-import '../../../../core/widgets/image_profile_widget.dart';
-import '../../../../../app/di.dart' as di;
 
 class CommentMainWidget extends StatefulWidget {
   final AppEntity appEntity;

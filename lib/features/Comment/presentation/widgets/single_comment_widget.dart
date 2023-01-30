@@ -4,13 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../../../app/di.dart' as di;
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/constants_manager.dart';
 import '../../../../core/utils/routes_manager.dart';
 import '../../../../core/utils/values_manager.dart';
-import '../../../../core/widgets/input_field.dart';
 import '../../../../core/widgets/image_profile_widget.dart';
-import '../../../../../app/di.dart' as di;
+import '../../../../core/widgets/input_field.dart';
 import '../../../replay/domain/entities/replay_entity.dart';
 import '../../../replay/presentation/cubit/replay_cubit.dart';
 import '../../../replay/presentation/widgets/single_replay_widget.dart';

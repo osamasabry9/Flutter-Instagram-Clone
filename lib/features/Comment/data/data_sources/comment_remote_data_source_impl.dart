@@ -2,11 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/features/Comment/data/data_sources/comment_remote_data_source.dart';
-import 'package:instagram_clone/features/Comment/domain/entities/comment_entity.dart';
 
 import '../../../../core/utils/constants_manager.dart';
+import '../../domain/entities/comment_entity.dart';
 import '../models/comment_model.dart';
+import 'comment_remote_data_source.dart';
 
 class CommentRemoteDataSourceImpl implements CommentRemoteDataSource {
   final FirebaseFirestore firebaseFirestore;
