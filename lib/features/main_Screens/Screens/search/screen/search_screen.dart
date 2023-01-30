@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instagram_clone/features/Post/presentation/cubit/post_cubit.dart';
 
-import '../widgets/search_main_widget.dart';
 import '../../../../../app/di.dart' as di;
+import '../../../../Post/presentation/cubit/post_cubit.dart';
+import '../widgets/search_main_widget.dart';
 
 
 class SearchScreen extends StatelessWidget {

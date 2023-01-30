@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instagram_clone/core/utils/color_manager.dart';
-import 'package:instagram_clone/features/Post/domain/entities/post_entity.dart';
-import 'package:instagram_clone/features/user/presentation/profile/cubit/user_cubit.dart';
 
+import '../../../../../core/utils/color_manager.dart';
 import '../../../../../core/utils/constants_manager.dart';
 import '../../../../../core/utils/routes_manager.dart';
 import '../../../../../core/utils/values_manager.dart';
 import '../../../../../core/widgets/image_profile_widget.dart';
 import '../../../../../core/widgets/input_field.dart';
+import '../../../../Post/domain/entities/post_entity.dart';
 import '../../../../Post/presentation/cubit/post_cubit.dart';
 import '../../../../user/domain/entities/user_entity.dart';
+import '../../../../user/presentation/profile/cubit/user_cubit.dart';
 
 class SearchMainWidget extends StatefulWidget {
   const SearchMainWidget({Key? key}) : super(key: key);
