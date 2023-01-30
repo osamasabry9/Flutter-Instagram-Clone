@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/utils/values_manager.dart';
-import '../../../../../core/utils/color_manager.dart';
 import '../../../../Post/domain/entities/post_entity.dart';
 import '../../../../Post/presentation/cubit/post_cubit.dart';
 import '../../../domain/usecases/get_current_uid_usecase.dart';
@@ -11,6 +10,7 @@ import '../widgets/app_bar_profile_widget.dart';
 import '../widgets/info_user_widget.dart';
 import '../widgets/view_posts_widget.dart';
 import '../../../../../app/di.dart' as di;
+import 'select_section_widget.dart';
 
 class SingleUserProfileMainWidget extends StatefulWidget {
   final String otherUserId;
@@ -68,12 +68,7 @@ class _SingleUserProfileMainWidgetState
                     Text(
                       "${singleUser.bio}",
                     ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: AppPadding.p10),
-                      child: Divider(
-                        color: ColorManager.grey,
-                      ),
-                    ),
+                    const SelectSectionWidget(),
                     ViewPostsWidget(userId: singleUser.uid!),
                   ],
                 ),

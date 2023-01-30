@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instagram_clone/core/utils/routes_manager.dart';
-import 'package:instagram_clone/core/widgets/main_button.dart';
+import '../../../../../core/utils/routes_manager.dart';
+import '../../../../../core/widgets/main_button.dart';
 
 import '../../../../../../core/utils/color_manager.dart';
 import '../../../../../../core/utils/values_manager.dart';
@@ -101,12 +101,13 @@ class InfoUserWidget extends StatelessWidget {
                       MainButton(
                         width: MediaQuery.of(context).size.width * 0.25,
                         height: MediaQuery.of(context).size.height * 0.05,
+                        isBold: false,
                         title: currentUser.followers!.contains(currentUid)
                             ? "UnFollow"
                             : "Follow",
                         color: currentUser.followers!.contains(currentUid)
                             ? ColorManager.white.withOpacity(.4)
-                            : ColorManager.grey,
+                            : ColorManager.primary,
                         onTap: () {
                           BlocProvider.of<UserCubit>(context)
                               .followUnFollowUser(
@@ -119,8 +120,9 @@ class InfoUserWidget extends StatelessWidget {
                       MainButton(
                         width: MediaQuery.of(context).size.width * 0.25,
                         height: MediaQuery.of(context).size.height * 0.05,
+                        isBold: false,
                         title: "Message",
-                        color: ColorManager.grey,
+                        color: ColorManager.white.withOpacity(.4),
                         onTap: () {
                           Navigator.push(
                             context,
@@ -133,11 +135,6 @@ class InfoUserWidget extends StatelessWidget {
                           );
                         },
                       ),
-
-                      /*
-                      onTap: () {
-        
-                      */
                     ],
                   ),
           ],

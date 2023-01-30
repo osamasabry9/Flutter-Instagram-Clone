@@ -4,11 +4,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'user_remote_data_source.dart';
-import '../../domain/entities/user_entity.dart';
 
 import '../../../../core/utils/constants_manager.dart';
+import '../../domain/entities/user_entity.dart';
 import '../models/user_model.dart';
+import 'user_remote_data_source.dart';
 
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   final FirebaseFirestore firebaseFirestore;

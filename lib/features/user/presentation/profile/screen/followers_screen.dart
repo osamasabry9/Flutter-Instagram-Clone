@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../../app/di.dart' as di;
 import '../../../domain/entities/user_entity.dart';
 import '../../../domain/usecases/get_single_user_usecase.dart';

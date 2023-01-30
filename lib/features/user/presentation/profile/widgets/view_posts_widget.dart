@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instagram_clone/core/utils/routes_manager.dart';
-import 'package:instagram_clone/features/Post/presentation/cubit/post_cubit.dart';
+
+import '../../../../../core/utils/routes_manager.dart';
 import '../../../../../core/widgets/image_profile_widget.dart';
+import '../../../../Post/presentation/cubit/post_cubit.dart';
 
 class ViewPostsWidget extends StatelessWidget {
   final String userId;

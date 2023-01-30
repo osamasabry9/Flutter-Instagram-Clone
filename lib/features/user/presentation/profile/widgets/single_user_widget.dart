@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/utils/constants_manager.dart';
+import '../../../../../core/utils/constants_manager.dart';
 import '../../../../../core/utils/routes_manager.dart';
 import '../../../../../core/utils/values_manager.dart';
 import '../../../../../core/widgets/image_profile_widget.dart';

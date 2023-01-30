@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instagram_clone/features/user/domain/entities/user_entity.dart';
+import '../../../domain/entities/user_entity.dart';
 import '../../../../../../core/utils/routes_manager.dart';
 import '../../../../../../../core/utils/values_manager.dart';
 import '../../../../../../core/utils/color_manager.dart';

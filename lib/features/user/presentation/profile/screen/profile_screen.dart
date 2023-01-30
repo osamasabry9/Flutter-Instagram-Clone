@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instagram_clone/core/utils/color_manager.dart';
-import 'package:instagram_clone/features/user/domain/entities/user_entity.dart';
 
 import '../../../../../../core/utils/values_manager.dart';
+import '../../../../../app/di.dart' as di;
 import '../../../../Post/domain/entities/post_entity.dart';
 import '../../../../Post/presentation/cubit/post_cubit.dart';
+import '../../../domain/entities/user_entity.dart';
 import '../widgets/app_bar_profile_widget.dart';
 import '../widgets/info_user_widget.dart';
+import '../widgets/select_section_widget.dart';
 import '../widgets/view_posts_widget.dart';
-import '../../../../../app/di.dart' as di;
 
 class ProfileScreen extends StatelessWidget {
   final UserEntity currentUser;
@@ -68,12 +68,7 @@ class _ProfileMainWidgetState extends State<ProfileMainWidget> {
               Text(
                 "${widget.currentUser.bio}",
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: AppPadding.p10),
-                child: Divider(
-                  color: ColorManager.grey,
-                ),
-              ),
+              const SelectSectionWidget(),
               ViewPostsWidget(userId: widget.currentUser.uid!),
             ],
           ),
