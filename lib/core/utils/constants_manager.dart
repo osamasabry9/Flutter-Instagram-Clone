@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 import 'color_manager.dart';
 
 class AppConstants {
@@ -34,4 +35,5 @@ class FirebaseConst {
   static const String replay = "replay";
   static const String chats = "chats";
   static const String messages = "messages";
+  static const String stories = "stories";
 }

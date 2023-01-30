@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get_it/get_it.dart';
-import 'package:instagram_clone/features/chat/presentation/cubit/chat_cubit.dart';
+import '../features/chat/presentation/cubit/chat_cubit.dart';
 
 import '../features/Comment/data/data_sources/comment_remote_data_source.dart';
 import '../features/Comment/data/data_sources/comment_remote_data_source_impl.dart';

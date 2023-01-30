@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instagram_clone/features/Post/domain/entities/post_entity.dart';
-import 'package:instagram_clone/features/Post/presentation/screen/post_detail_screen.dart';
-import 'package:instagram_clone/features/chat/presentation/pages/chat_screen.dart';
-import 'package:instagram_clone/features/user/domain/entities/user_entity.dart';
-import 'package:instagram_clone/features/user/presentation/auth/cubit/auth/auth_cubit.dart';
-import 'package:instagram_clone/features/user/presentation/profile/screen/followers_screen.dart';
+import '../../features/Post/domain/entities/post_entity.dart';
+import '../../features/Post/presentation/screen/post_detail_screen.dart';
+import '../../features/chat/presentation/pages/chat_screen.dart';
+import '../../features/user/domain/entities/user_entity.dart';
+import '../../features/user/presentation/auth/cubit/auth/auth_cubit.dart';
+import '../../features/user/presentation/profile/screen/followers_screen.dart';
 
 import '../../app/app_entity.dart';
 import '../../features/Comment/domain/entities/comment_entity.dart';

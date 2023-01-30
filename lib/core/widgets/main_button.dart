@@ -12,6 +12,7 @@ class MainButton extends StatelessWidget {
   final double borderRadius;
   final VoidCallback onTap;
   final TextStyle? textStyle;
+  final bool isBold;
 
   // ignore: use_key_in_widget_constructors
   const MainButton({
@@ -23,6 +24,7 @@ class MainButton extends StatelessWidget {
     this.borderRadius = 20,
     required this.onTap,
     this.textStyle,
+    this.isBold = true,
   });
 
   @override
@@ -42,10 +44,9 @@ class MainButton extends StatelessWidget {
         child: Text(
           title.toUpperCase(),
           style: textStyle ??
-              Theme.of(context)
-                  .textTheme
-                  .displayLarge!
-                  .copyWith(color: ColorManager.white, fontSize: FontSize.s18),
+              Theme.of(context).textTheme.displayLarge!.copyWith(
+                  color: ColorManager.white,
+                  fontSize: isBold ? FontSize.s18 : FontSize.s14),
         ),
       ),
     );

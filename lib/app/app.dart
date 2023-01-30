@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instagram_clone/features/chat/presentation/cubit/chat_cubit.dart';
+import '../features/chat/presentation/cubit/chat_cubit.dart';
 
 import '../core/utils/routes_manager.dart';
 import '../core/utils/theme_manager.dart';
