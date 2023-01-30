@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:instagram_clone/features/Post/domain/usecases/delete_post_usecase.dart';
-import 'package:instagram_clone/features/Post/domain/usecases/like_post_usecase.dart';
-import 'package:instagram_clone/features/Post/domain/usecases/read_posts_usecase.dart';
-import 'package:instagram_clone/features/Post/domain/usecases/update_post_usecase.dart';
+import '../../domain/usecases/delete_post_usecase.dart';
+import '../../domain/usecases/like_post_usecase.dart';
+import '../../domain/usecases/read_posts_usecase.dart';
+import '../../domain/usecases/update_post_usecase.dart';
 
 
 import '../../domain/entities/post_entity.dart';

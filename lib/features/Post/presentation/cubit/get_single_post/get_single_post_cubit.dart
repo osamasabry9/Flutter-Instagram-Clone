@@ -1,10 +1,10 @@
 import 'dart:io';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:instagram_clone/features/Post/domain/usecases/read_single_post_usecase.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../domain/entities/post_entity.dart';
+import '../../../domain/usecases/read_single_post_usecase.dart';
 
 part 'get_single_post_state.dart';
 

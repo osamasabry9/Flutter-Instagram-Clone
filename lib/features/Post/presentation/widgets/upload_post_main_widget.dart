@@ -8,10 +8,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:instagram_clone/features/Post/domain/usecases/upload_image_post_usecase.dart';
 import 'package:uuid/uuid.dart';
+
+import '../../../../../app/di.dart' as di;
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/constants_manager.dart';
 import '../../../../core/utils/values_manager.dart';
-import '../../../../../app/di.dart' as di;
 import '../../../../core/widgets/image_profile_widget.dart';
 import '../../../user/domain/entities/user_entity.dart';
 import '../../../user/presentation/profile/widgets/input_edit_profile_widget.dart';

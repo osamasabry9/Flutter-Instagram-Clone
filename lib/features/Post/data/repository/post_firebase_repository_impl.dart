@@ -1,4 +1,4 @@
-import 'package:instagram_clone/features/Post/domain/entities/post_entity.dart';
+import '../../domain/entities/post_entity.dart';
 
 import 'dart:io';
 

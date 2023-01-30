@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icons_plus/icons_plus.dart';
-import 'package:instagram_clone/core/utils/color_manager.dart';
+import '../../../../core/utils/color_manager.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../app/di.dart' as di;
