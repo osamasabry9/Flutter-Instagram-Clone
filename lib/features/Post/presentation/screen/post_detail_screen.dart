@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../app/di.dart' as di;
 import '../cubit/get_single_post/get_single_post_cubit.dart';
 import '../cubit/post_cubit.dart';
-import '../../../../../app/di.dart' as di;
 import '../widgets/post_detail_main_widget.dart';
 
 
