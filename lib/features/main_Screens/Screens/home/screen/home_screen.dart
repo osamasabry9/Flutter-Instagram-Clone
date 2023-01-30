@@ -8,7 +8,6 @@ import '../../../../../core/utils/values_manager.dart';
 import '../../../../../core/utils/routes_manager.dart';
 import '../../../../Post/domain/entities/post_entity.dart';
 import '../../../../Post/presentation/cubit/post_cubit.dart';
-import '../../../../stroy/presentation/widgets/story_data.dart';
 import '../../../../user/domain/entities/user_entity.dart';
 import '../../../../user/presentation/profile/cubit/user_cubit.dart';
 import '../widgets/app_bar_widget.dart';
