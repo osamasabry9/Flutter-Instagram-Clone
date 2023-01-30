@@ -1,4 +1,4 @@
-import 'package:instagram_clone/features/chat/domain/entities/message_entity.dart';
+import '../entities/message_entity.dart';
 
 abstract class MessageRepository {
   Future<void> sendMessage(MessageEntity message);

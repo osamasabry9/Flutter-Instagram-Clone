@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:instagram_clone/core/utils/constants_manager.dart';
-import 'package:instagram_clone/core/utils/values_manager.dart';
-import 'package:instagram_clone/features/user/presentation/profile/cubit/user_cubit.dart';
+import '../../../../core/utils/constants_manager.dart';
+import '../../../../core/utils/values_manager.dart';
+import '../../../user/presentation/profile/cubit/user_cubit.dart';
 
 import '../../../../../app/di.dart' as di;
 import '../../../user/domain/entities/user_entity.dart';

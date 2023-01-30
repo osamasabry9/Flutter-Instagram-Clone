@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icons_plus/icons_plus.dart';
 
+import '../../../../../app/di.dart' as di;
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/constants_manager.dart';
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/image_profile_widget.dart';
 import '../../../user/domain/entities/user_entity.dart';
 import '../cubit/chat_cubit.dart';
-import '../../../../../app/di.dart' as di;
 import '../widgets/chat_details_widget.dart';
 
 class ChatDetailsScreen extends StatelessWidget {

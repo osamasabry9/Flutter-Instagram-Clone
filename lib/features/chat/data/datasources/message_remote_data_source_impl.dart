@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:instagram_clone/features/chat/data/models/message_model.dart';
-import 'package:instagram_clone/features/chat/domain/entities/message_entity.dart';
+import '../models/message_model.dart';
+import '../../domain/entities/message_entity.dart';
 
 import '../../../../core/utils/constants_manager.dart';
 import 'message_remote_data_source.dart';

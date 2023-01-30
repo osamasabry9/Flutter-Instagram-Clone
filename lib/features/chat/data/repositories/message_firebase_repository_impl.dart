@@ -1,4 +1,4 @@
-import 'package:instagram_clone/features/chat/domain/entities/message_entity.dart';
+import '../../domain/entities/message_entity.dart';
 
 import '../../domain/repositories/message_firebase_repository.dart';
 import '../datasources/message_remote_data_source.dart';

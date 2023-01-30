@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/features/chat/presentation/pages/chat_details_screen.dart';
+import '../pages/chat_details_screen.dart';
 
 import '../../../../core/utils/values_manager.dart';
 import '../../../../core/widgets/image_profile_widget.dart';
